@@ -1,0 +1,47 @@
+\subsection{First-Order Theories}
+
+Note that the truth table method for checking whether a given statement is a tautology fails for Chapter 2, as now this would require us to check the truth of a given wf for interpretations with arbitrarily large or infinite domains.
+
+Let $\lang$ be a FOL. A \textit{first-order theory} in the language $\lang$ will be a formal theory K whose symbols and wfs are the symbols and wfs of $\lang$ and whose axioms and rules of inference are specified as follows by 2.3.1-2.3.3.
+
+Axioms of K are either logical or proper (nonlogical). For most of this chapter we consider K with no proper axioms, e.g. a Predicate Calculus.
+
+\subsubsection{Logical Axioms}
+
+If $\B$, $\C$, and $\D$ are wfs of $\lang$, then the following are logical axioms of K:
+
+\begin{enumerate} [label = (A\arabic*)]
+    \item $\B \imp (\C \imp \B)$
+    \item $(\B \imp (\C \imp \D)) \imp ((\B \imp \C) \imp (\B \imp \D))$
+    \item $(\lnot \C \imp \lnot \B) \imp ((\lnot \C \imp \B) \imp \C)$
+    \item $(\forall x_i) \B(x_i) \imp \B(t)$ if $\B(x_i)$ is a wf of $\lang$ and $t$ is a term of $\lang$ that is free for $x_i$ in $\B(x_i)$. Note that $t$ may be identical with $x_i$ so that all wfs $(\forall x_i) \B \imp \B$ are axioms by virtue of axiom (A4).
+    \item $(\forall x_i) (\B \imp \C) \imp (\B \imp (\forall x_i) \C)$ if $\B$ contains no free occurrences of $x_i$.
+\end{enumerate}
+
+Explaining the restrictions on (A4) and (A5):
+
+(A4): Consider this example where $t$ is not free for $x_i$ in $\B(x_i)$. Let $\B(x_1)$ be $\lnot( \forall x_2) A_1^2(x_1,x_2)$ and let $t$ be $x_2$. Now, consider the following (illegal) instance of (A4):
+\[\bm{(\Delta)} \quad (\forall x_1)\big( \lnot (\forall x_2) A_1^2(x_1,x_2) \big) \imp \lnot( \forall x_2) A_1^2 (x_2, x_2)\]
+
+Now take an interpretation as any domain with at least two members and let $A_1^2$ stand for the identity relation. Then, the antecedent of $\bm{(\Delta)}$ is true and the consequent is false.
+
+(A5): Consider this example where $x_i$ is free in $\B$. Let $\B$ and $\C$ both be $A_1^1(x_1)$. Now, consider the following (illegal) instance of axiom (A5):
+
+\[\bm{(\Delta \Delta)} \quad (\forall x_1)\big( A_1^1(x_1) \imp A_1^1(x_1)\big) \imp \big(A_1^1(x_1) \imp (\forall x_1) A_1^1(x_1) \big)\]
+
+The antecedent of $\bm{(\Delta \Delta)}$ is logically valid. Now take as domain the set of integers and let $A_1^1(x)$ mean that $x$ is even. Then the consequent is false. So, any sequence $s=(s_1,s_2, \dots)$ for which $s_1$ is even does not satisfy the consequent of $\bm{(\Delta \Delta)}$, making it false for this interpretation.
+
+\subsubsection{Proper Axioms}
+
+These vary for different theories. As stated before, a theory with no proper axioms is a \textit{predicate calculus}.
+
+\subsubsection{Rules of Inference}
+
+\begin{enumerate}
+    \item Modus ponens (MP): $\C$ follows from $\B$ and $\B \imp \C$.
+    \item Generalization (Gen): $(\forall x_i) \B$ follows from $\B$.
+\end{enumerate} 
+
+\textbf{Definition}
+
+If K is a FOT of $\lang$, a \textit{model} of K is an interpretation of $\lang$ for which all the axioms of K are true. Every theorem of K is true in every model of K.

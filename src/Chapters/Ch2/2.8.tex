@@ -1,0 +1,135 @@
+\subsection{First-Order Theories with Equality}
+
+In this chapter we introduce the standard interpretation, i.e. a first-order theory with equality. Let $A_1^2$ be a predicate letter for which $A_1^2(t,s)$ indicates that $t=s$, and vice versa $\lnot A_1^2(t, s)$ indicates that $t \not = s$. More specifically, K is a first-order theory of equality if the followin are theorems of K:
+
+\begin{enumerate} [label = (A\arabic*)]
+    \setcounter{enumi}{5}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_1)x_1=x_1$ & (reflexivity principle)
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $x=y \imp \big(\B(x,x) \imp \B(x,y) \big)$ & (substitutivity of equality)
+        \end{tabular}
+\end{enumerate}
+Where $x$ and $y$ are any variables, $\B(x,y)$ is any wf, and $\B(x,y)$ arises from $\B(x,x)$ by replacing some (but not necessarily all) free occurrences of $x$ by $y$ provided that $y$ is free for $x$ in $\B(x,x)$. So, $\B(x,y)$ may or may not contain free occurrences of $x$. Note that the numbering of the above axioms is a continuation of the logical axioms (A1)-(A5).
+
+\textbf{Proposition 2.23}
+
+In any theory of equality,
+\begin{enumerate}
+    \item $\vdash t=t$ for any term $t$.
+    \item $\vdash t=s \imp s=t$ for any terms $t$ and $s$.
+    \item $\vdash t=s \imp (s=r \imp t=r)$ for any terms $t$, $s$, and $r$.
+\end{enumerate}
+
+\textbf{Proof}
+\begin{enumerate} [label = \alph*.]
+    \item By (A6), $\vdash (\forall x_1) x_1=x_1$. Hence, by rule A4, $\vdash t=t$.
+    \item \begin{enumerate} [label = \roman*.]
+        \item Let $x$ and $y$ be variables not occurring in $t$ or $s$.
+        \item Letting $\B(x,x)$ be $x=x$ and $\B(x,y)$ be $x=y$ in schema (A7): \[\vdash x=y \imp (x=x \imp x=y)\]
+        \item But, by (a), $\vdash x=x$.
+        \item So, by instance of the tautology
+        \[(A\imp (B \imp C)) \imp (B \imp (A \imp C))\]
+        and two applications of MP, we get $\vdash x=y \imp y=x$.
+        \item Two applications of Gen yields $\vdash(\forall x)(\forall y)(x=y \imp y=x)$.
+        \item Then two applications of rule A4 yields $\vdash t=s \imp s=t$.
+    \end{enumerate}
+    \item \begin{enumerate} [label = \roman*.]
+        \item Let $x$, $y$, and $z$ be three variables not occurring in $t$, $s$, or $r$.
+        \item Then let $\B(y,y)$ be $y=z$ and $\B(x,x)$ be $x=z$ in (A7).
+        \item Now, with $x$ and $y$ interchanged, we obtain $\vdash y=x \imp(y=z \imp x=z)$.
+        \item By, by (b), $\vdash x=y \imp y=x$.
+        \item Now, using an instance of the tautology
+        \[(A\imp B) \imp ((B \imp C) \imp (A \imp C))\]
+        and two applications of MP, we obtain $\vdash x=y\imp(y=z\imp x=z)$.
+        \item Similarly to our proof of (b), by three applications of gen we obtain 
+        \[(\forall x)(\forall y)(\forall z)(x=y \imp (y=z \imp x=z))\]
+        \item Then three applications of rule A4 obtains $\vdash t=s \imp (s=r \imp t=r)$.
+    \end{enumerate}
+\end{enumerate}
+
+\textbf{Proposition 2.24}
+Let K be a theory for which (A6) holds and (A7) holds for all atomic wfs $\B(x,x)$ in which there are no individual constants. Then K is a theory with equality, that is, (A7) holds for all wfs $\B(x,x)$.
+
+
+\textbf{Proof}
+This proposition serves the purpose of reducing the schema (A7) to simpler cases. I don't feel like writing this proof up at the moment and it doesn't seem incredibly significant so I am skipping it for now.
+
+\textbf{Proposition 2.25}
+Let K be any theory in which (A6) holds and the following are true:
+\begin{enumerate} [label = \alph*.]
+    \item Schema (A7) holds for all atomic wfs $\B(x,x)$ such that no function letters or individual constants occur in $\B(x,x)$ and $\B(x,y)$ comes from $\B(x,x)$ by replacing exactly one occurrence of $x$ by $y$.
+    \item $\vdash x=y \imp f_j^n(z_1,\dots,z_n)=f_j^n(w_1,\dots,w_n)$, where $f_j^n$ is any function letter of K, $z_1,\dots, z_n$ are variables, and $f_j^n(w_1,\dots,w_n)$ arises from $f_j^n(z_1,\dots,z_n)$ by replacing exactly one occurrence of $x$ by $y$.
+\end{enumerate}
+Then K is a theory of equality. 
+
+\textbf{Proof}
+\begin{enumerate}
+    \item By repeated application, our assumptions can be extended to replacements of ore than one occurrence of $x$ by $y$.
+    \item Also, Poposition 2.23 is still derivable.
+    \item By Proposition 2.24, it suffices to prove (A7) for only atomic wfs without individual constants.
+    \item But, hypothesis (a) allows us to prove 
+    \[
+    \vdash (y_1=z_1 \land \dots \land y_n=z_n) \imp (\B(y_1, \dots, y_n) \imp \B(z_1, \dots, z_n))
+    \]
+    for all variables $y_1, \dots, y_n, z_1, \dots z_n$ and any atomic wf $\B(y_1, \dots, y_n)$ without function letters or individual constants.
+    \item So, if suffices to show the following:
+    \begin{center}
+        (*) If $t(x,x)$ is a term without individual constants and $t(x,y)$ comes from $t(x,x)$ by replacing some occurrences of $x$ by $y$, then $\vdash x=y \imp t(x,x)=t(x,y)$. \footnote{$\ $You can clarify how (*) is applied by using it to prove the following instance of (A7): $\vdash x=y \imp (A_1^1(f_1^1(x))\imp A_1^1(f_1^1(y)))$. Let $t(x,x)$ be $f_1^1(x)$ and let $t(x,y)$ by $f_1^1(y)$.}
+    \end{center}
+    \item But (*) can be proved using hypothesis (b) by induction on the number of function letters in $t(x,x)$. This is left as an exercise in the book, maybe I will add this later (probably not, sorry).
+    \item It can be seen from Proposition 2.25 that it is only necessary to verify (A7) for a finite list of special cases when the language K has only finitely many predicate and function letters. \footnote{$\ $In fact, $n$ wfs for each $A_j^n$ and $n$ wfs for each $f_j^n$.}
+\end{enumerate}
+
+Some Additional notes. Not sure why this isn't a proposition, considering that this part of the textbook seems very much like a proof.
+
+\begin{enumerate}
+    \item In any model for a theory K with equality, the relation E in the model corresponding to the predicate letter = is an equivalence relation (by Proposition 2.23).
+    \item If this relation E is the identity relation in the domain of the model, then the model is said to be \textit{normal}.
+    \item Any model M for K can be \textit{contracted} to a normal model M$^*$ for K by taking the domain $D^*$ of M$^*$ to be the set of equivalence classes determined by the relation E in the domain $D$ of M.
+    \item For a predicate letter $A_j^n$ and for any equivalence classes $[b_1], \dots, [b_n]$ in $D^*$ determined by elements $b_1, \dots, b_n$ in $D$, we let $(A_j^n)^{\text{M}^*}$ hold for $([b_1], \dots, [b_n])$ iff $\model{A_j^n}$ holds for $(b_1, \dots, b_n)$.
+    \item Notice that it makes no difference which representatives $b_1, \dots, b_n$ we select in the given equivalence classes because, from (A7):
+    \[
+    \vdash x_1=y_1 \land \dots \land x_n = y_n \imp (A_j^n(x_1, \dots, x_n) \bicon A_j^n(y_1, \dots, y_n))
+    \]
+    \item Likewise, for any function letter $f_j^n$ and any equivalence classes $[b_1], \dots, [b_n]$ in $D^*$, let $(f_j^n)^{\text{M}^*}([b_1], \dots, [b_n])=[\model{f_j^n}(b_1, \dots, b_n)]$.
+    \item Again note that this is independent of the choise of the representatives $b_1, \dots, b_n$, since, from (A7), we can prove:
+    \[
+    \vdash x_1=y_1 \land \dots \land x_n = y_n \imp (f_j^n(x_1, \dots, x_n) \bicon f_j^n(y_1, \dots, y_n))
+    \]
+    \item For any individual constant $a_i$ let $(a_i)^{\text{M}^*}=[\model{a_i}]$.
+    \item The relation E$^*$ corresponding to = in the model M$^*$ is the identity relation in $D^*:E^*([b_1],[b_2])$ iff $E(b_1,b_2)$, that is, iff $[b_1]=[b_2]$.
+    \item Now one can prove by induction the following lemma:
+    \item If $s=(b_1, b_2, \dots)$ is a denumerable sequence of equivalence classes, then a wf $\B$ is satisfied by $s$ in M iff $\B$ is satisfied by $s'$ in M$^*$.
+    \item It follows that, for any wf $\B$, $\B$ is true for M iff $\B$ is true for M$^*$.
+    \item Hence, because M is a model of K, M$^*$ is a normal model of K.
+\end{enumerate} \\
+
+
+\textbf{Proposition 2.26 (Extension of Proposition 2.17)}
+(\godel, 1930) Any consistent theory with equality K has a finite or denumerable normal model.
+
+\textbf{Proof}
+
+By Proposition 2.17, K has a denumerable model M. Hence, the contraction of M to a normal model yields a finite or denumerable normal model M$^*$ because the set of equivalence classes in a denumerable set $D$ is either finite or denumerable.
+
+\textbf{Corollary 2.27 (Extension of Skolem-L\"owenheim Theorem)}
+Any theory with equality K that has an infinite normal model M has a denumerable normal model.
+
+\textbf{Proof}
+\begin{enumerate}
+    \item Add to K the denumerably many new individual constants $b_1, b_2, \dots$ together with the axioms $b_i \not = b_j$ for $i \not = j$
+    \item Then the new theory K$'$ is consistent.
+    \item If K$'$ were inconsistent, there would be a proof in K$'$ of a contradiction $\C \land \lnot \C$, where we may assume that $\C$ is a wf of K. \footnote{$\ $If K$'$ is inconsistent, it can prove anything, including a wf $\C$ of K and its negation $\lnot \C$.}
+    \item But this proof uses only a finite number of the new axioms: $b_{i1} \not = b_{j1}, \dots, b_{in} \not = b_{jn}$.
+    \item Now, M can be extended to a model M$^\#$ of K plus the axioms $b_{i1} \not = b_{j1}, \dots, b_{in} \not = b_{jn}$.
+    \item In fact, since M is an infinite normal model, we can choose interpretations of $b_{i1}, b_{j1}, \dots, b_{in}, b_{jn}$ so that the wfs $b_{i1} \not = b_{j1}, \dots, b_{in} \not = b_{jn}$ are true.
+    \item But, since $\C \land \lnot \C$ is derivable from these wfs and the axioms of K, it would follow that $\C \land \lnot \C$ is true for M$^\#$, which is impossible.
+    \item Hence, K$'$ must be consistent.
+    \item Now, by Proposition 2.26, K$'$ has a finite or denumerable normal model N.
+    \item But, since, for $i \not = j$, the wfs $b_i \not = b_j$ are axioms of K$'$, they are true for N.
+    \item Thus, the elements in the domain of N that are interpretations of $b_1, b_2, \dots$ must be distinct, which implies that the domain of N is infinite, and therefore, denumerable.
+\end{enumerate}

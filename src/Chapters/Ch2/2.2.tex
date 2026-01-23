@@ -1,0 +1,89 @@
+\subsection{FOL's and Their Interpretations: Satisfiability and Truth: Models}
+
+We use the following symbols for our first-order Language $\lang$.
+
+\begin{enumerate} [label = \alph*.]
+    \item The propositional connectives $\lnot$ and $\imp$, as well as $\forall$.
+    \item Punctuation marks: "$($", "$)$", and "$,"$.
+    \item Denumerably many individual variables $x_1,x_2, \dots$
+    \item A finite or denumerable, possibly empty, set of function letters.
+    \item A finite or denumerable, possibly empty, set of individual constants.
+    \item A nonempty set of predicate letters.\\
+    A \textit{term of} $\lang$ means a term whose symbols are symbols of $\lang$. \\
+    A \textit{wf of} $\lang$ means a wf whos symbols are symbols of $\lang$.
+\end{enumerate}
+
+\comment{Note} denumerable = finite or countably infinite (e.g. can be mapped one-to-one with $\mathbb{N}$).
+
+Now we define an interpretation M of $\lang$:
+
+\begin{enumerate} [label = \alph*.]
+    \item A nonempty set $D$, called the \textit{domain} of the interpretation.
+    \item For each predicate letter $A_j^n$ of $\lang$, an assignment of an $n$-place relation $(A_j^n)^{\text{M}}$ in $D$.
+    \item For each function letter $f_j^n$ of $\lang$, an assignment of an $n$-place operation $(f_j^n)^{\text{M}}$ in $D$ (that is, a function from $D^n$ to $D$).
+    \item For each individual constant $a_i$ of $\lang$, an assignment of some fixed element $(a_i)^{\text{M}}$ of $D$.
+\end{enumerate}
+
+An $n$-place relation in $D$ can be thought of as a subset of $D^n$, the set of all $n$-tuples of elements in $D$. For a given interpretation of $\lang$, a wf without free variables, e.g. a closed wf, is either true or false. A wf with some free variables may be satisfied, i.e. true, for some values of the domain and not for others.
+
+\textbf{Satisfaction}
+
+A denumerable sequence $s=(s_1,s_2,s_3,\dots)$ satisfies a wf $\B$ that has $x_{j_1}, x_{j_2}, \dots, x_{j_n}$ as free variables (where $j_1<j_2<\dots <j_n$) if the $n$-tuple $\langle s_{j_1}, s_{j_2}, \dots, s_{j_n} \rangle$ satisfies $\B$ in the usual sense. \textcolor{red}{\textbf{<<clarify this>>}}
+
+For example, a denumerable sequence $(s_1,s_2,s_3,\dots)$ of objects in the domain of an interpretation M will turn out to satisfy the wf $A_1^2(x_2, x_5)$ iff the ordered pair, $\langle s_2,s_5 \rangle$ is in the relation $(A_1^2)^{\text{M}}$ assigned to the predicate letter $A_1^2$ by the interpretation M.
+
+Let M be an interpretation of a language $\lang$ and let $D$ be the domain of M. Let $\Sigma$ be the set of all denumerable sequences of elements of $D$. For a wf $\B$ of $\lang$, we shall define what it means for a sequence $s=(s_1,s_2, \dots)$ in $\Sigma$ to satisfy $\B$ in M. As a preliminary step, for a given $s \in \Sigma$ we shall define a function $s^*$ that assigns to each term $t$ of $\lang$ an element $s^*(t)$ in $D$.
+
+\begin{enumerate}
+    \item If $t$ is a variable $x_j$, let $s^*(t)$ be $s_j$.
+    \item If $t$ is an individual constant $a_j$, then $s^*(t)$ is the interpretation $(a_j)^{\text{M}}$.
+    \item If $f_k^n$ is a function letter, $(f_k^n)^{\text{M}}$ is the corresponding operation in $D$, and $t_1,\dots, t_n$ are terms, then 
+    \[s^*(f_k^n(t_1,\dots, t_n))=(f_k^n)^\text{M} (s^*(t_1),\dots, s^*(t_n))\]
+\end{enumerate}
+
+Also, $s^*(t)$ is the element of $D$ obtained by substituting, for each $j$, a name of $s_j$ for all occurrences of $x_j$ in $t$ and then performing the operations of the interpretation corresponding to the function letters of $t$.
+
+Now for an inductive definition of satisfaction.
+
+\begin{enumerate}
+    \item If $\B$ is an atomic wf $A_k^n(t_1, \dots, t_n)$ and $(A_k^n)^\text{M}$ is the corresponding $n$-place relation of the interpretation, then a sequence $s=(s_1,s_2,\dots)$ satisfies $\B$ iff $(A_k^n)^\text{M}(s^*(t_1),\dots, s^*(t_n))$, e.g. if the $n$-tuple $\langle s^*(t_1),\dots, s^*(t_n) \rangle$ is in the relation $(A_k^n)^\text{M}$.
+    \item $s$ satisfies $\B$ iff $s$ does not satisfy $\lnot \B$.
+    \item $s$ satisfies $\B \imp \C$ iff $s$ does not satisfy $\B$ or $s$ satisfies $\C$. 
+    \item $s$ satisfies $(\forall x_i)\B$ iff every sequence that differs from $s$ in at most the $i$th component satisfies $\B$.
+\end{enumerate}
+
+What this also means is that a squence $s=(s_1, s_2, \dots)$ satisfies a wf $\B$ iff, when, for each $i$, we replace all free occurrences of $x_i$ (if any) in $\B$ by a symbol representing $s_i$, the resulting proposition is true under the given interpretation.
+
+\textbf{Truth and Falsity of wfs in Interpretations}
+
+\begin{enumerate}
+    \item A wf $\B$ is \textit{true for the interpretation} M ($\vDash_\text{M} \B$) iff every sequence in $\Sigma$ satisfies $\B$.
+    \item $\B$ is said to be \textit{false for} M iff no sequence in $\Sigma$ satisfies $\B$.
+    \item An interpretation M is said to be a \textit{model} for a set $\Gamma$ of wfs iff every wf in $\Gamma$ is true for M.
+\end{enumerate}
+
+This leads to the following properties of truth, falsity, and satisfaction. I-V are very obvious so I'm skipping those (e.g. they are specifying how logical operators from chapter 1 behave as expected in this new context).
+
+\begin{enumerate} [label = \Roman*.]
+  \setcounter{enumi}{5}
+  \item $\vDash_\text{M}$ iff $\vDash_\text{M} (\forall x_i) \B$. 
+  This result can be extended. By the closure of $\B$ we mean the closed wf obtained from $\B$ by prefixing in universal quantifiers those variables, in order of descending subscripts, that are free in $\B$. If $\B$ has no free variables, its closure is $\B$. \\
+  For example, if $\B$ is $A_1^2(x_2,x_5) \imp \lnot(\exists x_2) A_1^3(x_1, x_2, x_3)$ then its closure is $(\forall x_5)(\forall x_3)(\forall x_2)(\forall x_1) \B$. A wf $\B$ is true iff is closure is true.
+  \item Every instance of a tautology is true for any interpretation. To prove this, show that all instances of the axioms of the system L are true and then use (III) and Prop 1.14.
+  \item If the free variables of a wf $\B$ occur in the list $x_{i_1},\dots, x_{i_k}$ and if the sequences $s$ and $s'$ have the same components in the $i_1$th, $\dots$, $i_k$th places, then $s$ satisfies $\B$ iff $s'$ satisfies $\B$.
+  \item If $\B$ is a closed wf of $\lang$, then either $\vDash_\text{M} \B$ or $\vDash_\text{M} \lnot \B$ for some interpretation M, e.g. either $\B$ is true or $\B$ is false for M. If $\B$ is not closed (e.g. contains free variables) then $\B$ may be true, false, or neither for some interpretation M. For example, if $\B$ is $A_1^2(x_1,x_2)$ and we consider an interpretation in which the domain is the set of integers and $A_1^2(y,z)$ is interpreted as $y<z$, then $\B$ is only satisfied by sequences $s=(s_1,s_2,\dots)$ such that $s_1<s_2$. This means that $\B$ is not satisfied by all sequences, hence it is neither true nor false for all interpretations.
+  \item Assume that $t$ is free for $x_i$ in $\B(x_i)$. Then $(\forall x_i) \B(x_i) \imp \B(t)$ is true for all interpretation. The proof of (X) is based upon lemmas 1 and 2 from the text (page 59 \& 60).
+  \item If $\B$ does not contain $x_i$ free, then $(\forall x_i)(\B \imp \C) \imp (\B \imp (\forall x_i) \C)$ is true for all interpretations.
+\end{enumerate} 
+
+\textbf{Definitions}
+
+\textit{Logically valid}: A wf $\B$ which is true for every interpretation.
+
+\textit{Satisfiable}: A wf $\B$ for which there is an interpretation which satisfies $\B$ for at least one sequence. Note that if $\B$ is closed, it is either satisfied by all sequences or by none. So, $\B$ is satisfiable iff $\B$ is true for some interpretation.
+
+\textit{Contradictory}: A wf $\B$ which is false for every interpretation, e.g. $\lnot \B$ is logically valid.
+
+\textit{Logically imply}: $\B$ logically implies $\C$ iff, in every interpretation, every sequence which satisfies $\B$ also satisfies $\C$. Moreover, $\C$ is a \textit{logical consequence} of a set $\Gamma$ of wfs iff, in every interpretation, every sequence that satisfies every wf in $\Gamma$ also satisfies $\C$. 
+
+\textit{Logically equivalent}: $\B$ and $\C$ logically imply eachother.

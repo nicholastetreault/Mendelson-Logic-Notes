@@ -1,0 +1,121 @@
+\subsection{Additional Metatheorems and Derived Rules}
+
+\subsubsection{Particularization Rule A4}
+
+If $t$ is free for $x$ in $\B(x)$, then $(\forall x)\B(x) \vdash \B(t)$.
+
+\subsubsection{Existential Rule E4}
+
+Let $t$ be a term that is free for $x$ in a wf $\B(x,t)$, and let $\B(t,t)$ arise from $\B(x,t)$ by replacing all free occurences of $x$ by $t$. ($\B(x,t)$ may or may not contain occurences of $t$) Then, $\B(t, t) \vdash (\exists x) \B(x, t)$. 
+
+There are also derived rules for all the normal stuff from before (e.g. negation elimination, conjunction introduction, biconditional elimination, proof by contradiction, etc.). Refer to page 74 for more.
+
+\textbf{Lemma 2.8}
+
+For any wfs $\B$ and $\C$, $\vdash (\forall x)(\B \bicon \C) \imp \big((\forall x) \B \bicon (\forall x) \C \big)$. 
+
+\textbf{Proof}
+
+\begin{enumerate}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) (\B \bicon \C)$ & Hyp
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) \B$ & Hyp
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $\B \bicon \C$ & 1, rule A4
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $\B$ & 2, rule A4
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $\C$ & 3, 4, $\bicon$ elim
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) \C$ & 5, Gen
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) (\B \bicon \C), (\forall x) \B \vdash (\forall x) \C$ & 1-6
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) (\B \bicon \C) \vdash (\forall x) \B \imp(\forall x) \C$ & 1-7, Corollary 2.6
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) (\B \bicon \C) \vdash (\forall x) \C \imp(\forall x) \B$ & Proof like 8
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $(\forall x) (\B \bicon \C) \vdash (\forall x) \B \bicon (\forall x) \C$ & 8, 9, $\bicon$ intro
+        \end{tabular}
+    \item
+        \begin{tabular}{p{8cm} r}
+            $\vdash (\forall x)(\B \bicon \C) \imp \big((\forall x) \B \bicon (\forall x) \C \big)$ & 1-10, Corollary 2.6
+        \end{tabular}
+\end{enumerate}
+
+\textbf{Proposition 2.9}
+
+If $\C$ is a subformula of $\B$, $\B'$ is the result of replacing zero or more occurences of $\C$ in $\V$ by a wf $\D$, and every free variable of $\C$ or $\D$ that is also a bound variable of $\B$ occurs in the list $y_1,\dots, y_k$, then:
+
+\begin{enumerate} [label = \alph*.]
+    \item $\vdash [(\forall y_1) \dots(\forall y_k)(\C \bicon \D)] \imp (\B \bicon \B')$ (Equivalence theorem)
+    \item If $\vdash \C \bicon \D$, then $\vdash \B \bicon \B'$ (Replacement theorem)
+    \item If $\vdash \bicon \D$ and  $\vdash \B$, then $\vdash \B'$
+\end{enumerate}
+
+\textit{Example}
+\[\vdash (\forall x) \big(A_1^1(x) \bicon A_2^1(x)\big ) \imp [(\exists x) A_1^1(x) \bicon (\exists x) A_2^1(x)]\]
+
+\textbf{Proof} 
+We use induction on the number of connectives and quantifiers in $\B$.
+
+\begin{enumerate}
+    \item If zero occurrences are replaced, $\B'$ is $\B$ and the wf to be proved is an instance of the tautology $A \imp (B \bicon B)$.
+    \item If $\C$ is identical to $\B$ and this occurrence of $\C$ is replaced by $\D$, the wf \[[(\forall y_1)\dots(\forall y_k)(\C \bicon \D)] \imp (\B \imp \B')\] is derivable by Exercise 2.27(d). Here is the theorem from 2.27(d): \[\vdash (\forall y_1)\dots (\forall y_k) \B \imp \B\] I might figure out how to prove this later idk. This is the base case.
+    \item So, we can assume that $\C$ is a proper part of $\B$ (e.g. not identical, think proper subset versus subset) and that at least one occurence of $\C$ is replaced.
+    \item \textbf{IH}: the result holds for all wfs with fewer connectives and quantifiers than $\B$. Now we consider all cases which break down $\B$ into smaller parts for our inductive step.
+    \begin{enumerate} [label = Case \arabic*., leftmargin=2\parindent]
+        \item $\B$ is an atomic wf. So, $\C$ cannot be a proper part of  $\B$.
+        \item $\B$ is $\lnot \Escr$. Let $\B'$ be $\lnot \Escr '$. By \textbf{IH}:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\Escr \bicon \Escr ')\]
+        Now we find a suitable tautology:
+        \[(C \imp (A \bicon B)) \imp (C \imp (\lnot A \bicon \lnot B))\]
+        Let $[(\forall y_1) \dots (\forall y_k)(\C \bicon \D)]$ be $C$, let $\Escr$ be $A$, and $\Escr '$ be $\B$. Notice that after this substitution, the premise of our tautology is of the same form as our \textbf{IH}. So, by MP, we obtain:
+        \[C \imp (\lnot A \bicon \lnot B)\]
+        And, if we substitute our wfs back in we get:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\lnot \Escr \bicon \lnot \Escr ')\]
+        Recall that $\B$ is $\lnot \Escr$ and $\B'$ is $\lnot \Escr '$. So, we obtain:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\B \bicon \B')\]
+        \item $\B$ is $\Escr \imp \F$. Let $\B'$ be $\Escr' \imp \F$. By IH:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\Escr \bicon \Escr ')\]
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\F \bicon \F ')\]
+        Because $\Escr$ and $\F$ are smaller than $\B$. Now we find a suitable tautology:
+        \[(A \imp (\B \bicon C)) \land (A \imp (D \bicon E)) \imp (A \imp [( B \imp D) \bicon (C \imp E)])\]
+        This might seem like a scarily long and arbitrary wf. However, if you follow along closely, you can see that it actually works out very nicely. We follow a similar procedure to case 2. Let $[(\forall y_1) \dots (\forall y_k)(\C \bicon \D)]$ be A, $\Escr$ be $B$, and so on. Notice that the premise of our tautology matches both applications of \textbf{IH} joined by $\land$. So, by MP we obtain the antecedent of our tautology. Substitute back in our wfs and we obtain:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\lnot \Escr \bicon \lnot \Escr ')\]
+        \item $\B$ is $(\forall x) \Escr$. Let $\B'$ be $(\forall x) \Escr '$. By \textbf{IH}:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\Escr \bicon \Escr ')\]
+        Now, $x$ does not occur free in $(\forall y_1) \dots (\forall y_k)(\C \bicon \D)$ because, if it did, it would be free in $\C$ or $\D$ and, since it is bound in $\B$, it would be one of $y_1,\dots, y_k$. and it would not be free in $(\forall y_1) \dots (\forall y_k)(\C \bicon \D)$. Hence, by axiom (A5) we obtain:
+        \[\vdash (\forall y_1) \dots (\forall y_k)(\C \bicon \D) \imp (\forall x)(\Escr \bicon \Escr ')\]
+        By Lemma 2.8, we also obtain: \textcolor{red}{\textbf{<<Typo on this statement on pg 77!>>}}
+        \[\vdash (\forall x)(\Escr \bicon \Escr ') \imp ((\forall x)\Escr \bicon (\forall x) \Escr ')\] 
+        Then, by a suitable tautology and MP:
+        \[\vdash [(\forall y_1) \dots (\forall y_k)(\C \bicon \D)] \imp (\B \bicon \B')\]
+    \end{enumerate}
+    \item From $\vdash \C \bicon \D$, by several (in particular, $k$) applications of Gen, we obtain $\vdash (\forall y_1) \dots (\forall y_k)(\C \bicon \D)$. Then, by step 4 and MP, $\vdash \B \bicon \B'$.
+    \item Use step 5 and $\bicon$ elimination.
+\end{enumerate}
+
+\textcolor{red}{\textbf{<<Conceptual Note>>}}
+
+Notice that having as few inference rules as possible makes for fewer steps during induction. The proof for Poposition 2.9 was already quite verbose; imagine if we had more inference rules! The nice thing about our system is that we can use other connectives (e.g. $\lor$ or $\bicon$) in our wfs without having to prove them during induction because they can all be rewritten in terms of $\imp$ and $\lnot$. Notice that we had to prove the above claim for $\B$ in terms of some wf of the form $\lnot \C$ or $\D \imp \F$!

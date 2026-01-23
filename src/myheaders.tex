@@ -1,0 +1,102 @@
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{bm}
+% \usepackage{fdsymbol}
+% \DeclareFontFamily{U}{FdSymbolA}{}
+% \DeclareFontShape{U}{FdSymbolA}{m}{n}{
+%       <-> s * FdSymbolA
+% }{}
+% \DeclareSymbolFont{fdsymbols}{U}{FdSymbolA}{m}{n}
+
+% Define \dotminus from fdsymbol without changing other symbols
+% \DeclareMathSymbol{\dotminus}{\mathbin}{fdsymbols}{"64}
+
+\newcommand{\comment}[1]{\textbf{\textcolor{red}{\textless\textless{}#1\textgreater\textgreater{}}}}
+
+\newcommand{\godel}{G\"{o}del}
+
+\newcommand{\A}{\mathscr{A}}
+\newcommand{\B}{\mathscr{B}}
+\newcommand{\C}{\mathscr{C}}
+\newcommand{\D}{\mathscr{D}}
+\newcommand{\Escr}{\mathscr{E}}
+\newcommand{\F}{\mathscr{F}}
+\newcommand{\I}{\mathscr{I}}
+\newcommand{\lang}{\mathscr{L}}
+\newcommand{\LA}{\mathscr{L}_A}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\bicon}{\Leftrightarrow}
+
+\newcommand{\prooves}{\vdash_\text{S}}
+\newcommand{\proovej}{\vdash_\text{J}}
+\newcommand{\proovek}{\vdash_\text{K}}
+\newcommand{\proovekn}{\vdash_{\text{K}_n}}
+\newcommand{\prooveknone}{\vdash_{\text{K}_{n-1}}}
+
+\newcommand{\proves}{\vdash_\text{S}}
+\newcommand{\provej}{\vdash_\text{J}}
+\newcommand{\provek}{\vdash_\text{K}}
+\newcommand{\provekn}{\vdash_{\text{K}_n}}
+\newcommand{\proveknone}{\vdash_{\text{K}_{n-1}}}
+
+\newcommand{\modelM}{\vDash_\text{M}}
+\newcommand{\interp}[1]{\ensuremath{(#1)^{\text{M}}}}
+
+% Stuff for Chapter 3
+\DeclareMathOperator{\sg}{sg}
+\DeclareMathOperator{\sgb}{\overline{\sg}}
+\DeclareMathOperator{\remain}{rm}
+\DeclareMathOperator{\qt}{qt}
+\DeclareMathOperator{\Bt}{Bt}
+\DeclareMathOperator{\IC}{IC}
+\DeclareMathOperator{\FL}{FL}
+\DeclareMathOperator{\PL}{PL}
+\DeclareMathOperator{\EVbl}{EVbl}
+\DeclareMathOperator{\EIC}{EIC}
+\DeclareMathOperator{\EFL}{EFL}
+\DeclareMathOperator{\EPL}{EPL}
+\DeclareMathOperator{\Gd}{Gd}
+\DeclareMathOperator{\Modus}{MP}
+\DeclareMathOperator{\Gen}{Gen}
+\DeclareMathOperator{\Trm}{Trm}
+\DeclareMathOperator{\Atfml}{Atfml}
+\DeclareMathOperator{\Fml}{Fml}
+\DeclareMathOperator{\Subst}{Subst}
+\DeclareMathOperator{\SuB}{SuB}
+\DeclareMathOperator{\Fr}{Fr}
+\DeclareMathOperator{\Ff}{Ff}
+\DeclareMathOperator{\Neg}{Neg}
+\DeclareMathOperator{\Cond}{Cond}
+\DeclareMathOperator{\Clos}{Clos}
+\DeclareMathOperator{\Sent}{Sent}
+\DeclareMathOperator{\G}{G}
+\DeclareMathOperator{\Hfunc}{H}
+\DeclareMathOperator{\Num}{Num}
+\DeclareMathOperator{\Nu}{Nu}
+\DeclareMathOperator{\Dfunc}{D}
+\DeclareMathOperator{\PrAx}{PrAx}
+\DeclareMathOperator{\Ax}{Ax}
+\DeclareMathOperator{\Prf}{Prf}
+\DeclareMathOperator{\Pf}{Pf}
+
+\newcommand{\argt}{\text{Arg}_\text{T}}
+\newcommand{\argp}{\text{Arg}_\text{P}}
+\newcommand{\Axone}{\text{Ax}_1}
+\newcommand{\Axtwo}{\text{Ax}_2}
+\newcommand{\Axthree}{\text{Ax}_3}
+\newcommand{\Axfour}{\text{Ax}_4}
+\newcommand{\Axfive}{\text{Ax}_5}
+\newcommand{\lh}{\ell\hbar}
+%\newcommand{\onebar}{\bar{1}}
+%\newcommand{\twobar}{\bar{2}}
+%\nenwcommand{\kbar}{\bar{k}}
+
+
+% for dotminus
+\makeatletter
+\newcommand{\dotminus}{\mathbin{\text{\@dotminus}}}
+
+\newcommand{\@dotminus}{%
+  \ooalign{\hidewidth\raise1ex\hbox{.}\hidewidth\cr$\m@th-$\cr}%
+}
+\makeatother

@@ -1,0 +1,115 @@
+\subsection{Quantifiers}
+
+If $P(x)$ asserts that $x$ has the property $P$, then $(\forall x)P(x)$ means that property $P$ holds for all $x$, or, in other words, that everything has the property $P$.
+
+\noindent
+On the other hand, $(\exists x) P(x)$ means that some $x$ has the property $P$--that is, that there is at least one object having the property $P$. 
+
+\noindent
+\textbf{Symbols for FOL}:
+
+\begin{itemize}
+  \item Commas, parentheses, $\lnot$, $\Rightarrow$, $\forall$, $\exists$, and:
+  \item Individual variables: $x_1,x_2,\dots, x_n, \dots$
+  \item Individual constants: $a_1, a_2, \dots, a_n, \dots$
+  \item Predicate letters: $A_k^n$
+  \item Function letters: $f_k^n$
+\end{itemize}
+
+\noindent
+$n$ is the number of arguments, $k$ is the indexing number to distinguish various functions and predicates with the same number of arguments. Functions applied to variables and individual constants generate terms.
+
+\noindent
+\textbf{Variables vs. Terms}:
+
+\begin{enumerate}
+  \item Variables and individual constants are terms.
+  \item If $f_k^n$ is a function letter and $t_, \dots, t_n$ are terms, then $f_k^n(t_1, \dots, t_n)$ is a term.
+  \item An expression is a term iff it can be shown to be a term on the basis of conditions 1 and 2.
+\end{enumerate} 
+
+\noindent
+\textbf{Well-formed formulas}:
+
+\noindent
+$A_k^n(t_1, \dots, t_n)$ is an atomic formula. All wfs can be defined as follows:
+
+\begin{enumerate}
+    \item Every atomic formula.
+    \item If $\B$ and $\C$ are wfs and $y$ is a variable, $(\lnot \B)$, $(\B \imp \C)$, and $((\forall y)\B)$ are wfs.
+    \item An expression is a wf iff it can be shown to be a wf on the basis of conditions 1 and 2.
+\end{enumerate}
+
+\noindent
+Note that if $\B$ does not contain $y$, then $((\forall y)\B)$ means the same thing as $\B$. Also, note that we can define $((\exists y)\B)$ in terms of $\lnot ((\forall y) (\lnot \B))$
+
+\noindent
+\textbf{Parenthesis}:
+\par
+\noindent
+An example of restoring parenthesis:
+
+\begin{enumerate}
+    \item $(\forall x_1) A_1^1(x_1) \imp A_1^2(x_2,x_1)$
+    \item $((\forall x_1) A_1^1(x_1)) \imp A_1^2(x_2,x_1)$
+    \item $(((\forall x_1) A_1^1(x_1)) \imp A_1^2(x_2,x_1))$
+\end{enumerate} 
+
+\noindent
+\textbf{Bound and Free Variables}:
+
+\noindent
+An occurrence of a variable $x$ is \textit{bound} for a wf $\B$ if it is either the $x$ in $(\forall x)$ or it is within the scope of a $(\forall x)$ in $\B$. 
+
+\noindent
+For example:
+\begin{enumerate}
+    \item $A_1^2(x_1,x_2)$
+    \item $A_1^2(x_1,x_2) \imp (\forall x_1)A_1^1(x_1)$
+\end{enumerate}
+
+\noindent
+In example 1, the single occurrence of $x_1$ is free. In example 2, the first occurence of $x_1$ is free, but the other two are bound. Check the textbook for more examples.
+
+\noindent
+Sometimes we indicate that some variables $x_{i_1}, \dots, x_{i_k}$ are free variables in a wf $\B$ by writing $\B(x_{i_1}, \dots, x_{i_k})$. This does not mean that $\B$ contains these variables as free variables, nor does it mean that $\B$ does not contain other free variables. This notation is convenient because we can then agree to write as $\B(t_1, \dots, t_k)$ the result of substituting in $\B$ the terms $t_1, \dots, t_k$ for all free occurrenecs (if any) of $x_{i_1}, \dots, x_{i_k}$, respectively.
+
+\noindent
+If $\B$ is a wf and $t$ is a term, then $t$ is said to be \textit{free} for $x_i$ in $\B$ if no free occurrence of $x_i$ in $\B$ lies within the scope of any quantifier $(\forall x_j)$, where $x_j$ is a variable in $t$. This concept of $t$ being free for $x_i$ for a wf $\B(x_i)$ will be important later. This means that, if $t$ is substituted for all free occurences (if any) of $x_i$ in $\B(x_i)$, no ocurrence of a variable in $t$ becomes a bound occurrence in $\B(t)$.
+
+\noindent
+Some important facts:
+
+\begin{enumerate}
+    \item A term that contains no variables is free for any variable in any wf.
+    \item A term $t$ is free for any variable in $\B$ if none of the variables of $t$ is bound in $\B$.
+    \item $x_i$ is free for $x_i$ in any wf.
+    \item Any term is free for $x_i$ in $\B$ if $\B$ contains no free occurrences of $x_i$.
+\end{enumerate}
+
+\noindent
+\textbf{Exercise 2.6}: Is the term $f_1^2(x_1,x_2)$ free for $x_1$ in the following wfs?
+
+\begin{enumerate} [label = \alph*.]
+    \item \begin{tabular}{p{8cm} r}
+            $A_1^2(x_1,x_2) \imp (\forall x_2)A_1^1(x_2)$ & A: yes
+    \end{tabular}
+    \item \begin{tabular}{p{8cm} r}
+            $((\forall x_2)A_1^2(x_2,a_1)) \lor (\exists x_2) A_1^2(x_1, x_2)$ & A: no
+    \end{tabular}
+    \item \begin{tabular}{p{8cm} r}
+            $(\forall x_1)A_1^2(x_1,x_2)$ & A: yes
+    \end{tabular}
+    \item \begin{tabular}{p{8cm} r}
+            $(\forall x_2)A_1^2(x_1,x_2)$ & A: no
+    \end{tabular}
+    \item \begin{tabular}{p{8cm} r}
+            $(\forall x_2)A_1^1(x_2) \imp A_1^2(x_1,x_2)$ & A: yes
+    \end{tabular}
+\end{enumerate} 
+
+\noindent
+\textbf{Translating English sentences to wfs}:
+
+\noindent
+One example: \textit{Some people respect everyone}: $(\exists x)(P(x) \land (\forall y)(P(y) \imp R(x,y)))$ where $P(x)$ means $x$ is a person and $R(x,y)$ means $x$ respects $y$. More examples for this section on page 51 of the book, page 7 of chapter 2 pdf.

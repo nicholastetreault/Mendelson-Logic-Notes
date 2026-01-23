@@ -1,0 +1,484 @@
+\subsection{An Axiom System}
+
+We build our first-order theory S using our language of arithmetic, $\mathscr{L}_A$. It has a single predicate letter $A_1^2$. Because we want a normal interpretation, we write $t=s$ for $A_1^2(t, s)$. $\mathscr{L}_A$ has one individual constant $a_1$. $0$ is the shorthand for $a_1$. Finally, $\mathscr{L}_A$ has three function letters, $f_1^1$, $f_1^2$, and $f_2^2$.
+
+The proper axioms of S are:
+
+\begin{enumerate} [label=(S\arabic*), leftmargin=2cm]
+    \item $x_1=x_2 \Rightarrow (x_1=x_3 \Rightarrow x_2=x_3)$
+    \item $x_1=x_2\Rightarrow x_1'=x_2'$
+    \item $0 \not= x_1'$
+    \item $x_1'=x_2' \Rightarrow x_1=x_2$
+    \item $x_1+0=x_1$
+    \item $x_1+x_2=(x_1+x_2)'$
+    \item $x_1\cdot 0=0$
+    \item $x_1 \cdot (x_2)' = (x_1 \cdot x_2) + x_1$
+    \item $\B(0) \Rightarrow \big( (\forall x)(\B(x) \imp \B(x')) \imp (\forall x) \B(x)\big)$ for any wf $\B(x)$ of S.
+\end{enumerate}
+
+(S9) represents the \textit{principle of mathematical induction}. Notice that (S1)-(S8) are particular wfs, while (S9) is an axiom schema.
+
+From (S9) by MP, we obtain the \textit{induction rule}:
+\[\B(0), (\forall x) \big( \B(x) \imp \B(x') \big) \vdash_s (\forall x) \B(x)\]
+
+\textbf{Lemma 3.1}
+
+For any terms $t$, $s$, $r$, of $\mathscr{L}_A$, the following wfs are theorems of S.
+
+\begin{enumerate} [label=(S\arabic*)', leftmargin=2cm]
+    \item $t=r \Rightarrow (t=s \Rightarrow r=s)$
+    \item $t=r\Rightarrow t'=r'$
+    \item $0 \not= t'$
+    \item $t'=r' \Rightarrow t=r$
+    \item $t+0=t$
+    \item $t+r=(t+r)'$
+    \item $t\cdot 0=0$
+    \item $t \cdot (r)' = (t \cdot r) + t$
+\end{enumerate}
+
+\textbf{Proof}
+
+(S1)'-(S8)' follow from (S1)-(S8), respectively. First for the closure by means of Gen, use Exercise 2.48\footnote{$\ $Exercise 2.48: If $\B(x)$ is similar to $\B(y)$, $(\forall x)\B(x)$ is a subformula of $\C$, and $\C'$ is the result of replacing one or more occurrences of $(\forall x)\B(x)$ in $\C$ by $(\forall y)\B(y)$, prove that $\vdash \C \bicon \C'$.} to change all the bound variables to variables not occuring in terms $t$, $r$, $s$, and then apply rule A4 with the appropriate terms $t$, $r$, $s$.
+
+\textbf{Proposition 3.2}
+
+For any terms $t$, $s$, $r$, the following wfs are theorems of S.
+
+\begin{enumerate} [label=\alph*.]
+    \item $t=t$
+    \item $t=r \imp r=t$
+    \item $t=r \imp (r=s \imp t=s)$
+    \item $r=t \imp (s=t \imp r=s)$
+    \item $t=r \imp t+s = r+s$
+    \item $t=0+t$
+    \item $t'+r=(t+r)'$
+    \item $t+r=r+t$
+    \item $t=r \imp s+t=s+r$
+    \item $(t+r)+s=t+(r+s)$
+    \item $t=r \imp t\cdot s = r \cdot s$
+    \item $0 \cdot t = 0$
+    \item $t' \cdot r = t\cdot r + r$
+    \item $t \cdot r = r \cdot t$
+    \item $t=r \imp s \cdot t= s \cdot r$
+\end{enumerate}\\
+
+\textbf{Proof} (The rest are in the textbook)
+
+\begin{itemize}
+    \item a. \begin{enumerate} [label=\arabic*.]
+        \item \begin{tabular}{p{8cm} r}
+            $t+0=t$ & (S5)'
+        \end{tabular}
+    
+        \item \begin{tabular}{p{8cm} r}
+            $(t+0=t)\imp (t+0=t \imp t=t)$ & (S1)'
+        \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $t+0=t \imp t=t$ & 1, 2, MP
+        \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $t=t$ & 1, 3, MP
+        \end{tabular}
+    \end{enumerate}
+    \item g. Let $\B(y)$ be $x' + y=(x+y)'$.
+        \begin{enumerate} [label=\roman*.]
+            \item \begin{enumerate} [label=\arabic*.]
+                \item \begin{tabular}{p{8cm} r}
+                $x' + 0 = x'$ & (S5')
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x+0=x$ & (S5')
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $(x+0)'=x'$ & 2, (S2'), MP
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x'+0=(x+0)'$ & 1, 3, part (d), MP
+                \end{tabular}
+            \end{enumerate}
+            Thus, $\vdash_S \B(0)$
+            \item \begin{enumerate} [label=\arabic*.]
+                \item \begin{tabular}{p{8cm} r}
+                $x'+y=(x+y)'$ & Hyp
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x'+y'=(x'+y')'$ & (S6')
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $(x'+y')'=(x+y)''$ & 1, (S2'), MP
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x'+y'=(x+y)''$ & 2, 3, part (c), MP
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x+y'=(x+y)'$ & (S6')
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $(x+y')'=(x+y)''$ & 5, (S2'), MP
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $x'+y'=(x+y')'$ & 4, 6, part (d), MP
+                \end{tabular}
+                \item \begin{tabular}{p{8cm} r}
+                $\vdash_S x'+y=(x+y)' \imp x'+y'=(x+y')'$ & 1-7, deduction theorem
+                \end{tabular}
+            \end{enumerate}
+            Thus, $\vdash_S \B(y) \imp \B(y')$, and, by Gen, $\vdash_S(\forall y)(\B(y) \imp \B(y'))$. Hence, by (i), (ii), and the induction rule, $\vdash_S (\forall y) (x'+y= (x+y)')$. By Gen and rule A4, $\vdash_S t'+r=(t+r)'$
+        \end{enumerate}
+\end{itemize}
+
+\textbf{Corollary 3.3}
+
+S is a theory of with equality
+
+\textbf{Proof}
+
+By Prop 2.25, this reduces to parts (a)-(e), (i), (k), and (o) of Prop 3.2, and (S2').
+
+Notice that the interpretation in which
+
+\begin{enumerate} [label = \alph*.]
+    \item The set of nonnegative integers is the domain
+    \item The integer $0$ is the interpretation of the symbol $0$
+    \item The successor operation (addition of $1$) is the interpretation of the function (that is, of $f_1^1$)
+    \item Ordinary addition and multiplication are the interpretations of $+$ an $\cdot$
+    \item The interpretation of the predicate letter $=$ is the identity relation
+\end{enumerate}
+
+is a normal model for S. This is the \textit{standard interpretation} or \textit{standard model}. Any normal model for S which is not isomorphic to the standard model will be called a \textit{nonstandard} model of S.
+
+It is important to note that if we recognize the standard interpretation to be a model for S, then S is consistent. However, this is somewhat of a semantic argument and is regarded by some as too precarious to serve as a basis for consistency proofs. Mendelson doesn't prove that the axioms of S are true under the standard interpretation, but it is taken to be intuitively obvious. It is common to take the statement of the consistency of S as an explicit unproven assumption.
+
+\textbf{Proposition 3.4}
+
+For and terms $t$, $r$, $s$, the following wfs are theorems of S.
+
+\begin{enumerate} [label = \alph*.]
+    \item $t \cdot (r+s)=(t \cdot r) + (t \cdot s)$ (distributivity)
+    \item $(r+s) \cdot t = (r\cdot t) + (s \cdot t)$ (distributivity)
+    \item $(t \cdot r) \cdot s = t \cdot (r \cdot s)$ (associativity of $\cdot$)
+    \item $t+s=r+s \imp t=r$ (cancellation law for $+$)
+\end{enumerate}\\
+
+\textbf{Proof}
+
+\begin{enumerate} [label = \alph*.]
+    \item Prove $\prooves x \cdot (y+z)=(x \cdot y) + (x \cdot z)$ by induction on $z$.
+    \item Use part (a) and Proposition 3.2(n).
+    \item Prove $\proves (x \cdot y) \cdot z= x \cdot (y \cdot z)$ by induction on $z$.
+    \item Prove $\proves x + z = y + z \imp x = y$ by induction on $z$. This recquires, for the first time, use of (S4').
+\end{enumerate}
+
+The terms $0, 0', 0'', 0''', \dots$ we shall call \textit{numerals} and denote by $\overline{0}, \overline{1}, \overline{2}, \overline{3}, \dots$. More precisely, $\overline{0}$ is $0$ and, for any natural number $n$, $\overline{n+1}$ is $(\overline{n})'$. Essentially, $\overline{n}$ is the shorthand for a natural number $n$ which stands for a $0$ with $n$ successors applied. That is:
+\[0\hspace{-.4em}\overbrace{''''^{\dots}}^{n \text{ times}} = \overline{n}\quad  \text{ which represents the numeral $n$ in the metalanguage.}\]
+
+\textbf{Proposition 3.5}
+
+The following are theorems of S.
+
+\begin{enumerate} [label = \alph*.]
+    \item $t+ \overline{1}= t'$
+    \item $t \cdot \overline{1} = t$
+    \item $t \cdot \overline{2} = t + t$
+    \item $t+s=0 \imp t = 0 \land s = 0$
+    \item $t \not = 0 \imp (s \cdot t = 0 \imp s = 0)$
+    \item $t + s = \overline{1} \imp (t = 0 \land s = \overline{1}) \lor (t = \overline{1} \land s = 0)$ 
+    \item $t \cdot s = \overline{1} \imp (t = \overline{1} \land s = \overline{1})$
+    \item $t \not = 0 \imp (\exists y)(t = y')$
+    \item $s \not = 0 \imp (t \cdot s = r \cdot s \imp t = r)$
+    \item $t \not = 0 \imp (t \not = 1 \imp (\exists y)(t = y''))$ 
+\end{enumerate}\\
+
+\textbf{Proof}
+
+The proofs in the chapter are pretty clear for this one so I'll spare myself the effort of typing it up.
+
+\textbf{Proposition 3.6}
+
+\begin{enumerate} [label = \alph*.]
+    \item Let $m$ and $n$ be any natural numbers.
+    \begin{enumerate} [label = \roman*.]
+        \item If $m \not = n$, then $\proves \overline{m} \not = \overline{n}$.
+        \item $\proves \overline{m + n} = \overline{m} + \overline{n}$ and $\prove \overline{m \cdot n} = \overline{m} \cdot \overline{n}$.
+    \end{enumerate}
+    \item Any model for S is infinite.
+    \item For any cardinal number $\aleph_\beta$, S has a normal model of cardinality $\aleph_\beta$.
+\end{enumerate}\\
+
+\textbf{Proof}
+
+\begin{enumerate} [label = \alph*.]
+    \item \begin{enumerate} [label = \roman*.]
+        \item Assume $m \not = n$. Either $m<n$ or $n < m$. Suppose, without loss of generality, that $m < n$. \footnote{$\ $That is, if it is actually the case than $n<m$ then switch them around.}
+        \begin{enumerate} [label = \arabic*.]
+            \item \begin{tabular}{p{8cm} r}
+                $\overline{m} = \overline{n}$ & Hyp
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $0\hspace{-.6em}\overbrace{'''^{\dots}}^{m \text{ times}} = 0\hspace{-.4em}\overbrace{''''^{\dots}}^{n \text{ times}}$ & 1 is an abbreviation of 2
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                Apply (S4') and MP $m$ times. We get $0=0\hspace{-1.1em}\overbrace{''''^{\dots}}^{n-m \text{ times}}\hspace{-1.2em}.$ Let $t=n-m-1$. Since $n>m$, $n- m-1\geq 0$. Thus, we obtain $0=t'$.
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $0 \not = t'$ & (S3')
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $0=t' \land 0 \not = t'$ & 3, 4, $\land$ intro
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $\overline{m}=\overline{n} \proves 0=t' \land 0 \not = t'$ & 1-5
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $\proves \overline{m} \not = \overline{n}$ & 1-6, proof by $\bot$
+                \end{tabular}
+        \end{enumerate}
+            \item We use induction in the metalanguage.
+            \begin{enumerate} [label = \arabic*.]
+                \item First, $\overline{m + 0}$ is $\overline{m}$.
+                \item Hence, $\proves \overline{m+0}= \overline{m} + \overline{0}$ by (S5').
+                \item Now assume $\proves \overline{m+n} = \overline{m} + \overline{n}$.
+                \tem Then $\proves \big(\overline{m+n}\big)' = \overline{m}+(\overline{n})'$ by (S2') and (S6').
+                \item But, $\overline{m+(n+1)}$ is $\big(\overline{m+n}\big)'$ and $\overline{n+1}$ is $(\overline{n})'$.
+                \item Hence, $\proves \overline{m+(n+1)} = \overline{m}+\big(\overline{n+1}\big)$.
+                \item Thus, $\proves \overline{m+n} = \overline{m} + \overline{n}$.
+                \item The proof that $\proves \overline{m \cdot n} = \overline{m} \cdot \overline{n}$ is left as an exercise for the reader.\footnote{$\ $For those taking (or who have taken) CS 374, notice how similar this is to string induction in the first few weeks!}
+            \end{enumerate}
+    \end{enumerate}
+    \item By part (a), (i), in a model for S the objects corresponding to the numerals must be distinct. But there are denumerably many numerals.
+    \item This follows from Corollary 2.34(c) and the fact that the standard model is an infinite normal model.
+\end{enumerate}
+
+Now we can introduce an order relation in S:
+\begin{align*}
+    t & < s \quad \text{for }(\exists w)(w\not = 0 \land w + t - s) \\
+    t & \leq s \quad \text{for } t < s \lor t = s \\
+    t & > s \quad \text{for } s < t \\
+    t & \geq s \quad \text{for } s \leq t \\
+    t & \not < s \quad \text{for } \lnot(t<s)\text{, and so on}
+\end{align*}
+
+In the first definition, we choose $w$ to be the first variable not in $t$ or $s$.
+
+\textbf{Proposition 3.7}
+
+For any terms $t$, $r$, $s$, the following are theorems. Refer to page 163 of the textbook for these, nothing exciting or unclear here (e.g. $t \not < t, r \not = 0 \bicon r > 0$, etc.).
+
+\textbf{Proposition 3.8}
+
+a. For any natural number $k$, $\proves x=0 \lor \ldots \lor x= \overline{k} \bicon x \leq \overline{k}$.
+
+a'. For any natural number $k$ and any wf $\B$, $\proves \B(0) \land \B(\overline{1}) \land \ldots \land \B(\overline{k}) \bicon (\forall x)(x\leq \overline{k} \imp \B(x))$. 
+
+b. For any natural number $k>0$, $\proves x=0 \lor \ldots \lor x = (\overline{k-1}) \bicon x < \overline{k}$.
+
+b'. For any natural number $k>0$ and any wf $\B$, $\proves \B(0) \land \B(\overline{1}) \land \ldots \land \B(\overline{k-1}) \bicon (\forall x)(x < \overline{k} \imp \B(x))$. 
+
+c. $\proves ((\forall x)(x<y \imp \B(x)) \land (\forall x)(x \geq y \immp \C(x))) \imp (\forall x)(\B(x) \lor \C(x))$.\\
+
+\textbf{Proof}
+
+a. We prove $\proves x=0 \land \ldots \land x=\overline{k} \bicon x \leq \overline{k}$ by induction in the metalanguage on $k$.
+\begin{enumerate}
+    \item The base case of $k=0$, $\proves x=0 \bicon x \leq $ is easy to get from the definitions and Proposition 3.7.
+    \item \textbf{IH}: Assume that $\proves x=0 \lor \ldots \lor x=\overline{k} \bicon x \leq \overline{k}$.
+    \item Now, assume $x=0 \lor \ldots \lor x= \overline{k} \lor x= \overline{k+1}$.
+    \item But, $\proves x = \overline{k+1} \imp x \leq \overline{k+1}$ and, by \textbf{IH}, $\proves x=0 \lor \ldots \lor x=\overline{k} \bicon x \leq \overline{k}$.
+    \item Also, $\proves x \leq \overline{k} \imp x \leq \overline{k+1}$.
+    \item Thus, $x \leq \overline{k+1}$.
+    \item So, $\proves x=0 \lor \ldots \lor x=\overline{k} \lor x=\overline{k+1} \bicon x \leq \overline{k+1}$.
+    \item Conversely, assume that $x \leq \overline{k+1}$.
+    \item Then, $x=\overline{k=1} \lor x<\overline{k+1}$.
+    \item If $x=\overline{k+1}$, then $x=0 \lor \ldots \lor x= \overline{k} \lor x=\overline{k+1}$.
+    \item If $x < \overline{k+1}$, then because $\overline{k+1}$ is $(\overline{k})'$, we have $x \leq \overline{k}$ by Proposition 3.7(l).
+    \item By \textbf{IH}, $x=0, \lor \ldots \lor x=\overline{k}$, and therefore $x=0 \lor \ldots \lor x= \overline{k} \lor x=\overline{k+1}$.
+    \item In either case, $x=0 \lor \ldots \lor x=\overline{k} \lor x=\overline{k+1}$.
+    \item This proves $\proves x \leq \overline{k+1} \imp x=0 \lor \ldots \lor x=\overline{k} \lor x= \overline{k+1}$.
+    \item From \textbf{IH}, we have derived that $\proves x=0 \lor \ldots \lor x=\overline{k+1} \bicon x \leq \overline{k+1}$ and this completes the proof.
+\end{enumerate}
+
+Here and onwards Mendelson begins to give more informal proofs as you may have noticed. He begins to omit deduction theorem, rule C, replacement theorem, tautologies, etc. Also, he does not provide proofs for the other theorems.
+
+\textbf{Proposition 3.9}
+There are are other forms of the induction principle which can now be formulated.
+\begin{enumerate} [label = \alph*.]
+    \item \textit{Complete Induction}: $\proves (\forall x)((\forall z)(z<x \imp \B(z)) \imp \B(x)) \imp (\forall x)\B(x)$. To translate to ordinary language, consider a property $P$ such that, for any $x$, if $P$ holds for all natural numbers less than $x$, then $P$ holds for $x$ also. Then $P$ holds for all natural numbers.
+    \item \textit{Least-number Principle}: $\proves (\exists x) \B(x) \imp (\exists y) \B(y)\land (\forall z)(z<y \imp \lnot \B(z))$. If a property $P$ holds for some natural number, then there is a least number satisfying $P$.
+\end{enumerate}
+
+
+\begin{enumerate} [label = \alph*.]
+    \item Let $\C(x)$ be $(\forall x)(z \leq x \imp \B(z))$.
+    \begin{enumerate} [label = \roman*.]
+        \item \begin{enumerate} [label = \arabic*.]
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall x)((\forall x)(x < x \imp (\B(z)) \imp \B(x))$ & Hyp
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z < 0 \imp \B(z)) \imp \B(0)$ & 1, rule A4
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $z \not < 0$ & Proposition 3.7(y)
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z < 0 \imp \B(z))$ & 3, tautology, Gen
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $\B(0)$ & 2, 4 MP
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z \leq 0 \imp \B(z))$, i.e., $\C(0)$ & 5, Proposition 3.8(a')
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall x)((\forall z)(z < x \imp \B(z)) \imp \B(x)) \proves \C(0)$ & 1-6
+                \end{tabular}
+        \end{enumerate}
+        \item \begin{enumerate} [label = \arabic*.]
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall x)((\forall z)(z < x \imp \B(z)) \imp \B(x))$ & Hyp
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $\C(x)$, i.e., $(\forall z)(z \leq x \imp \B(z))$ & Hyp
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z < x' \imp \B(z))$ & 2, Proposition 3.7($\ell$)
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z < x' \imp \B(z)) \imp \B(x')$ & 1, rule A4
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $\B(x')$ & 3, 4, MP
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $z \leq x \imp z < x' \lor z = x'$ & Definition, tautology
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $z < x' \imp \B(z)$ & 3, rule A4
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $z = x' \imp \B(z)$ & 5, (A7), Proposition 2.23(b), tautologies
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall z)(z \leq x' \imp \B(z))$, i.e., $\C(x')$ & 6, 7, 8, Tautology, Gen
+                \end{tabular}
+            \item \begin{tabular}{p{8cm} r}
+                $(\forall x)((\forall z)(z < x \imp \B(z))\imp \B(x)) \newline \proves (\forall x)(\C(x) \imp \C(x'))$ & 1-9, ded. them., Gen
+                \end{tabular}
+        \end{enumerate}
+    \end{enumerate}
+    By (i), (ii), and the induction rule, we obtain $\D \proves (\forall x)(\C(x)$, that is, $\D \proves (\forall x)(\forall z)(z \leq x \imp \B(z))$, where $\D$ is $(\forall x)((\forall z)(z < x \imp \B(z)) \imp \B(x))$. Hence, by rule A4 twice, $\D \proves x \leq x \imp \B(x)$. Notice that $\proves x \leq x$. So, $\D \proves \B(x)$, and, by Gen and deduction theorem, $\proves \D \imp (\forall x)\B(x)$.
+    \item Skipping this one.
+\end{enumerate} 
+
+\textbf{Definition}
+
+$t \mid s $ for $(\exists z)(s = t \cdot z)$. (Here, $z$ is the first variable now in $t$ or $s$).\\
+
+\textbf{Proposition 3.10}
+The following wfs are theorems for any terms $t$, $s$, and $r$.
+
+\begin{enumerate} [label = \alph*.]
+    \item $t \mid t$
+    \item $1 \mid t$
+    \item $t \mid 0$
+    \item $t \mid s \land s \mid r \imp t \mid r$
+    \item $s \not = 0 \land t \mid s \imp t \leq s$
+    \item $t \mid s \land s \mid t \imp s = t$
+    \item $t \mid s \imp t \mid (r \cdot s)$
+    \item $t \mid s \land t \mid r \imp t \mid(s+r)$
+\end{enumerate}
+
+\textbf{Proof}
+Skipping, the proofs aren't quite as important for these notions of math at this point. They are purely for rigor in confirming that we are able to prove these arithmetical definitions to allow us to set things up for later proofs, e.g. \godel $\ $numbering.
+
+\textbf{Proposition 3.11}
+\[
+\proves y \not = 0 \imp (\exists u)(\exists v)[x=y \cdot u + v \land c < y \land (\forall u_1)(\forall v_1)((x = y \cdot u_1 | v_1 \land v_1 < y) \imp y = u_1 \land v = v_1)]
+\]
+\textbf{Proof}
+\comment{Weird formatting error here for step 1 in the textbook}
+\begin{enumerate} [label = \roman*.]
+    \item \begin{enumerate} [label = \arabic*.]
+        \item \begin{tabular}{p{8cm} r}
+            $y \not = 0$ & Hyp
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $0 = y \cdot 0 + 0$ & (S5'), (S7')
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $0 < y$ & 1, Proposition 3.7(t)
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $0 = y \cdot 0 + 0 \lnd 0 < y$ & 2, 3, conjunction rule
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $(\exists u)(\exists v)(0 = y \cdot u + v \land v < y)$ & 4, rule E4 twice
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $y \not = 0 \imp (\exists u)(\exists v)(0 = y \cdot u + v \land v < y)$ & 1-5, ded. them.
+            \end{tabular}
+    \end{enumerate}
+    \item \begin{enumerate} [label = \arabic*.]
+        \item \begin{tabular}{p{8cm} r}
+            $\B(x)$, i.e., $y \not = 0 \imp (\exists u )(\exists v)(x = y \cdot u + v \land v < y)$ & Hyp
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $y \not = 0$ & Hyp
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $(\exists u )(\exists v)(x = y \cdot u + v \land v < y)$ & 1, 2, MP
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $x=y \cdot a + b \land b < y$ & 4, rule C twice
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b <y$ & 4, $\land$ elim
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' \leq y$ & 5, Proposition 3.7(k)
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' < y \lor b' = y$ & 6, definition
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' < y \imp (x'=y \cdot a + b' \land b' < y)$ & 4, (S6'), derived rules
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' < y \imp (\exists u)(\exists v)(x' = y \codt u + v \land v < y)$ & 8, rule E4, ded. them.
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' = y \imp x' = y \cdot a + y\cdot \overline{1}$ & 4, (S6'), Proposition 3.5(b)
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' = y \imp (x' = y \cdot (a + \overline{1}) + 0 \land 0 < y)$ & 10, Proposition 3.7(t), (S5')
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $b' = y \imp (\exists u)(\exists v)(x'y= \cdot u + v \land v <y)$ & 11, rule E4 twice, ded. them.
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $(\exists u)(\exists v)(x' = y \cdot u + v \land v < y)$ & 7, 9, 12, $\lor$ elim
+            \end{tabular}
+        \item \begin{tabular}{p{8cm} r}
+            $\B(x) \imp (y\not = 0 \imp (\exists u)(\exists v)(x' = y \cdot u + v \lor v < y))$, i.e., $\B(x) \imp \B(x')$ & 1-13, ded. them.
+            \end{tabular}
+    \end{enumerate}
+\end{enumerate}
+By (i), (ii), Gen, and the induction rule, $\proves (\forall x)(\B(x)$. This establishes the existence of a quotient $u$ and a remainder $v$. To prove uniqueness, proceed as follows:
+\begin{enumerate}
+    \item Assume $y \not = 0$.
+    \item Assume $x = \y \cdot u + v \land v < y$ and $x = y\cdot u_1 + v_1 \land v_1<y$.
+    \item Now, $u = u_1$ or $u< u_1$ or $u_1 < u$.
+    \item If $u = u_1$, then $v = v_1$ by Proposition 3.4(d).
+    \item If $u < u_1$, then $u_1 = u _ w$ for some $w\not = 0$.
+    \item Then $y \cdot u + v = y \cdot (u + w) + 
+    v_1 = y \cdot u + y \cdot w + v_1$.
+    \item Hence, $v=y \cdot w  + v_1$.
+    \item Since $w \not = 0$, $y \cdot w \geq y$.
+    \item So, $v = y \cdot w + v_1 \geq y$, contradicting $v < y$.
+    \item Hence, $u \not < u_1$.
+    \item Similarly, $u_1 \not < u$.
+    \item Thus, $u=u_1$.
+    \item Since $y \cdot u + v = x = y \cdot u_1 + v_1$, it follows that $v= v_1$.
+\end{enumerate}
+
+From this point on, one can generally translate into S and prove the results from any text on elementary number theory. There are a few important number-theoretic functions left to define, e.g. $x^y$ and $x!$, which will be done soon. It is important to note that there are some standard results of number theory which a proved with the aid of the theory of complex variables, which we will not provide in S. There are also some statements which rely on non-elementary concepts (e.g. logarithms) which, except in special cases, cannot be expressed in S. However, our system S will still be strong enough to derive our incompleteness results later on in this chapter. Moreover, we will see that the incompleteness of S cannot be attributed to the omission of some essential axiom of, but rather that is has deeper underlying causes that apply to other similarly strong theories as well.

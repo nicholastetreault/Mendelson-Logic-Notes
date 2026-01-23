@@ -1,0 +1,77 @@
+\subsection{Number-Theoretic Functions and Relations} 
+
+\textit{Number-theoretic function}: function whose arguments and values are natural numbers, e.g. addition and multiplication.
+
+\textit{Number-theoretic relation}: relation whose arguments are natural numbers, e.g. $=$ and $<$, with $x+y<z$ being a three argument number-theoretic relation.
+
+Let K be any theory in the language $\lang_A$ of arithmetic. A number-theoretic relation $R$ of $n$ aguments is \textit{expressible} in K \textbf{iff} there is a wf $\B(x_1, \dots, x_n)$ of K with the free variables $x_1, \dots, x_n$ such that, for any natural numbers $k_1, \dots, k_n$, the following hold:
+
+\begin{enumerate}
+    \item If $R(k_1, \dots, k_n)$ is true, then $\provek \B(\overline{k}_1, \dots, \overline{k}_n)$.
+    \item If $R(k_1, \dots, k_n)$ is false, then $\provek \lnot \B(\overline{k}_1, \dots, \overline{k}_n)$.
+\end{enumerate}
+
+For example, the number-theoretic relation of identity is expressed in S by the wf $x_1=x_2$. Moreover, if $k_1=k_2$, then $\overline{k}_1$ is the same term as $\overline{k}_2$ and so $\proves \overline{k}_1 = \overline{k}_2$ by Proposition 3.2(a). Similarly, the relation "less than" is expressible in by the wf $x_1<x_2$. The proof for this is outlined on page 170.
+
+If a relation is expressible in a theory K, then it is expressible in any extension of K.
+
+Let K be any theory with equality in the language $\lang_A$ of arithmetic. A number-theoretic function $f$ of $n$ arguments is said to be \textit{representible} in K \textbf{iff} there is a wf $\B(x_1, \dots, x_n, y)$ of K with the free variables $x_1, \dots, x_n, y$ such that, for any natural numbers $k_1, \dots, k_n, m,$ the following hold:
+
+\begin{enumerate}
+    \item If $f(k_1, \dots, k_n)=m$, then $\provek \B(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$.
+    \item $\provek(\exists_1 y) \B(\overline{k}_1, \dots, \overline{k}_n, y)$
+\end{enumerate}
+
+Furthermore, a function $f$ is said to be \textit{strongly representable} in K if we replace condition 2 with the wf $\provek (\exists_1 y) \B(x_1, \dots, x_n, y)$. otice that this wf implies the second condition by Gen and rule A4. Hence, strong representability implies representability. The converse is also true.\\
+
+\textbf{Proposition 3.12 (V.H. Dyson)}
+
+If $f(x_1, \dots, x_n)$ is representably in K, then it is strongly representable in K.
+
+\textbf{Proof}
+
+Assume $f$ is representable in K by a wf $\B(x_1, \dots, x_n, y)$. Let us show that $f$ is strongly representable in K by the following wf $\C(x_1, \dots, x_n, y)$:
+
+\[
+\big ( \big [ (\exists_1 y) \B(x_1, \dots, x_n, y) \big ] \lor \B(x_1, \dots, x_n, y) \big ) \lor \big ( \lnot \big [ (\exists_1 y) \B(x_1, \dots, x_n, y) \big ] \lor y = 0 \big )
+\]
+
+\begin{enumerate}
+    \item Assume $f(k_1, \dots, k_n) = m$. Then $\provek \B(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$ and $\provek (\exists_1 y) \B(\overine{k}_1, \dots, \overline{k}_n, y)$. So, by $\land$ introduction and $\lor$ introduction, we get $\provek \C(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$.
+\end{enumerate}
+\begin{enumerate} [label = \arabic*'.]
+    \setcounter{enumi}{1}
+    \item We must show $\provek (\exists_1 y) \C(x_1, \dots, x_n, y)$.
+\end{enumerate}
+
+\textit{Case 1}. Take $(\exists_1 y) \B(x_1, \dots, x_n, y)$ as hypothesis.
+
+\begin{enumerate} [label = (\roman*)]
+    \item We obtain $\B(x_1, \dots, x_n, b)$ from our hypothesis with Rule C, where $b$ is a new individual constant. Together with our hypothesis and $\land$ and $\lor$ introduction, this yields $\C(x_1, \dots, x_n, b)$ and then, by rule E4, $(\exists y) \C(x_1, \dots, x_n, y)$.
+    \item Assume $\C(x_1, \dots, x_n, u) \lor \C(x_1, \dots, x_n, v)$. From $\C(x_1, \dots, x_n, u)$ and our hypothesis, we obtain $\B(x_1, \dots, x_n, u)$, and, from $\C(x_1, \dots, x_n, v)$ and our hypothesis, we obtain $\B(x_1, \dots, x_n, v)$. Now, from $(\B(x_1, \dots, x_n, u)$ and $(\B(x_1, \dots, x_n, v)$ and our hypothesis, we get $u=v$. By the deduction theorem, $(\B(x_1, \dots, x_n, u) \land (\B(x_1, \dots, x_n, v) \imp u=v$.
+\end{enumerate}
+
+From (i) and (ii), $(\exists_1 y) \C(x_1, \dots, x_n, y)$. Thus, we have proved $\provek (\exists_1 y) \B(x_1, \dots, x_n, y) \imp (\exists_1 y) \C(x_1, \dots, x_n, y)$. \\
+
+\textit{Case 2}. Take $\lnot (\exists_1 y) \B(x_1, \dots, x_n, y)$ as hypothesis.
+
+\begin{enumerate} [label = (\roman*)]
+    \item From our hypothesis and the theorem $0=0$, we obtain $\lnot (\exists_1 y) \B(x_1, \dots, x_n, y) \land 0=0$ by $\land$ introduction. By $\lor$ introduction, $\C(x_1, \dots, x_n, 0)$, and, by rule E4, $(\xists y) \C(x_1, \dots, x_n, y)$.
+    \item Assume $\C(x_1, \dots, x_n, u) \land \C(x_1, \dots, x_n, v)$. From $\C(x_1, \dots, x_n, u)$ and our hypothesis, it follows that $u=0$. Likewise, from $\C(x_1, \dots, x_n, v)$ and our hypothesis, $v=0$. Hence, $u=v$. By the deduction theorem, we obtain $\C(x_1, \dots, x_n, u) \land \C(x_1, \dots, x_n, v) \imp u=v$.
+\end{enumerate}
+
+From (i) and (ii), $(\exists_1 y) \C(x_1, \dots, x_n, y)$. Thus, we have proved $\provek (\exists_1 y) \C(x_1, \dots, x_n, y)$.
+
+Since we have shown them to be equivalent, from now on we shall use representability and strong representability interchangeably.
+
+Observe that a function representable in K is representable in any extension of K.
+
+\textit{Examples}
+
+In these examples, let K be any theory with equality in the language $\lang_A$.
+
+\begin{enumerate}
+    \item The zero function, $Z(x) = 0$, is representable by the wf $x_1 = x_1 \land y=0$. For any $k$ and $m$, if $Z(k)=m$, then $m=0$ and $\provek \overline{k} = \overline{k} \land 0 = 0$ which means that condition 1 holds. Then, we can show that $\provek (\exists_1 y)(x_1=x_1 \land y = 0)$. Thus, condition 2' holds.
+    \item The successor function, $N(x)=x+1$, is representable in K by the wf $y=x_1'$. For any $k$ and $m$, if $N(k)=m$, then $m = k+1$ which means that $\overline{m}$ is $\overline{k'}$. Then $\provek \overline{m} = \overline{k'}$. One can verify that $\provek (\exists_1 y) (y=x_1')$.
+    \item The projection function, $U_j^n(x_1, \dots, x_n) = x_j$, is representable in K by $x_1=x_1 \land x_2=x_2 \land \dots \land x_n=x_n \land y = x_j$. If $U_j^n(k_1, \dots, k_n) = m$, then $m=k_j$. Hence, $\provek \overline{k}_1 = \overline{k}_1 \land \overline{k}_2$ 
+\end{enumerate}

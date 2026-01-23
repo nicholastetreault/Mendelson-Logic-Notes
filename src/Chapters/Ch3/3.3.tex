@@ -1,0 +1,86 @@
+\subsection{Primitive Recursive and Recursive Functions}
+
+\textbf{Definition}:
+\begin{enumerate}
+    \item The following functions are called \textit{initial functions}.
+        \begin{subitem} 
+        I. The \textit{zero function}, $Z(x)=0$ for all $x$ 
+        
+        \end{subitem}
+        
+        \begin{subitem}
+        II.  The \textit{successor function}, $N(x)=x+1$ for all $x$
+        
+        \end{subitem}
+        \begin{subitem}
+        III. The \textit{projection functions}, $U_i^n (x_1, \dots, x_n)=x_i$ for all $x_1, \dots, x_n$
+        \end{subitem}
+    \item The following are rules for obtaining new functions from given functions.
+        \begin{subitem} IV. \textit{Substitution}: 
+        \[f(x_1, \dots, x_n) = g\big(h_1(x_1, \dots, x_n), \dots, h_m(x_1, \dots, x_n)\big)\]
+
+        \center $f$ is said to be obtained by substitution from the functions
+
+        \[g(y_1, \dots, y_m), h_1(x_1, \dots, x_n), \dots, h_m(x_1, \dotsm x_n) \]
+        \end{subitem}
+        \begin{subitem}
+        V. \textit{Recursion}:
+        \[f(x_1, \dots, x_n, 0)=g(x_1, \dots, x_n)\]
+        \[f(x_1, \dots, x_n, y+1) = h\big(x_1, \dots, x_n, y, f(x_1, \dots, x_n, y)\big)\]
+        Here, we allow $n=0$, in which case we have:
+        \center $f(0)=k\quad$ where $k$ is a fixed natural number
+        \[f(y+1)=h\big(y, f(y)\big)\]
+        \end{subitem}
+
+\end{enumerate}
+
+
+
+\textbf{Proposition 3.16}
+
+The following functions are primitive recursive.
+
+\begin{enumerate} [label=\alph*.]
+    \item $x + y$
+    \item $x \cdot y$
+    \item $x^y$
+    \item $\delta(x) = \begin{cases}
+        x-1 & \text{if } x>0 \\
+        0 & \text{if } x=0
+    \end{cases}$ \\
+    This is the \textit{predecessor} function
+    \item $x \dotminus y =\begin{cases}
+        x-y & \text{if } x\geq y \\
+        0 & \text{if } x < y
+    \end{cases}$
+    \item $\sg(x) =\begin{cases}
+        0 & \text{if } x=0 \\
+        1 & \text{if } x \not =0
+    \end{cases}$
+    \item $\sgb(x) = \begin{cases}
+        1 & \text{if } x=0 \\
+        0 & \text{if } x \not = 0
+    \end{cases}$
+    \item $x!$
+    \item $\min (x,y)=$ minimum of $x$ and $y$
+    \item $\min(x_1, \dots, x_n)$
+    \item $\max(x, y)=$ maximum of $x$ and $y$
+    \item $\max(x_1, \dots, x_n)$
+    \item $\remain(x,y)=$ remainder upon division of $y$ by $x$
+    \item $\qt(x, y)=$ quotient of division of $y$ by $x$
+\end{enumerate}
+
+
+later example (just getting the tex down):
+
+\[\tau(x)=\sum_{y\leq x} \sgb(\remain (y, x))\]
+
+
+\textit{Examples}
+\begin{enumerate} [label=\arabic*.]
+    \item temp
+    \item temp 2
+    \item For $x>0$, let $\lh$ be the number of nonzero exponents in the factorization of of $x$ into powers of primes. This is also the same as saying the number of distinct primes that divide $x$. Let $\lh(0)=0$. Then $\lh$ is primitive recursive.
+\end{enumerate}
+
+

@@ -1,0 +1,285 @@
+\subsection{Completeness Theorems}
+
+Now we will show that the theorems of a first-order predicate calculus K are precisely the same as the logically valid wfs of K. Half of this result was proved in Proposition 2.2, but here we will establish this with more general propositions later.
+
+A few quick definitions:
+
+%If $x_i$ and $x_j$ are distinct, then $\B(x_i)$ and $\B(x_j)$ are said to be similar iff $x_j$ is free for $x_i$ in $\B(x_i)$ and $\B(x_i)$ has no free occurrences of $x_j$. We assume tha\input{Chapter_2/Sections/2.7}t $\B(x_j)$ arises from $\B(x_i)$ by substituting $x_j$ for all free occurrences of $x_i$. Notice that if $\B(x_i)$ and $\B(x_j)$ are similar,then $x_i$ is free for $x_j$ in $\B(x_j)$ and $\B(x_j)$ has no free occurrences of $x_i$. Thus, if $\B(x_i)$ and $\B(x_j)$ are similar, then $\B(x_j)$ and $\B(x_i$) are similar. Intuitively, $\B(x_i)$ and $\B(x_j)$ are similar iff $\B(x_i)$ and $\B(x_j)$ are the same except that $\B(x_i)$ has free occurrences of $x_i$ in exactly the same places where $\B(x_j)$ has free occurences of $x_j$.
+
+\textit{Example} \comment{Missing paren and extra bracket here in textbook}
+\begin{center}
+$(\forall x_3)\big[ A_1^2(x_1,x_3) \lor A_1^1(x_1) \big]$ and $(\forall x_3) \big[A_1^2(x_2, x_3) \lor A_1^1(x_2) \big]$ are similar.
+\end{center} 
+
+\textbf{Lemma 2.11}
+If $\B(x_i)$ and $\B(x_j)$ are similar, then $\vdash (\forall x_i)\B(x_i) \bicon (\forall x_j) \B(x_j)$. 
+
+\textbf{Proof}
+\begin{enumerate}
+    \item By axiom (A4), we get:
+    \[\vdash (\forall x_i) \B(x_i) \imp \B(x_j) \]
+    \item Then, be Gen we obtain:
+    \[\vdash (\forall x_j)((\forall x_i)\B(x_i) \imp \B(x_j))\]
+    \item Then, by axiom (A5) and MP, we obtain:
+    \[\vdash (\forall x_i) \B(x_i) \imp (\forall x_j) \B(x_j)\]
+    \item Now do the same thing to achieve the other direction and by $\bicon$ introduction we get:
+    \[\vdash (\forall x_i) \B(x_i) \bicon (\forall x_j) \B(x_j)\]
+\end{enumerate}
+
+\textbf{Lemma 2.12}
+If a closed wf $\lnot \B$ of a theory K is not provable in K, and if K$'$ is the theory obtained from K by adding $\B$ as a new axiom, then K$'$ is consistent.\\ 
+\textbf{Proof}
+Assume that K$'$ is inconsistent.
+\begin{enumerate}
+    \item Then, for some wf $\C$, $\vdash_{\text{K}'} \C$ and $\vdash_{\text{K}'} \lnot \C$.
+    \item Now, by proposition 2.1 we can instantiate the following tautology:
+    \[\vdash_{\text{K}'} \C \imp (\lnot \C \imp \lnot \B)\]
+    \item So, by MP twice, we get $\vdash_{\text{K}'} \lnot \B$.
+    \item Now, any use of $\B$ as an axiom in a proof K$'$ can be regarded as a hypothesis in a proof in K.
+    \item Hence, $\B \proovek \lnot \B$. 
+    \item Because $\B$ is closed, by corollary 2.7 we get $\proovek \B \imp \lnot \B$
+    \item However, we can instantiate the following tautology by Proposition 2.1:
+    \[\proovek (\B \imp \lnot \B) \imp \lnot \B\]
+    \item So, by MP we obtain $\proovek \lnot \B$
+\end{enumerate}
+Step 8 contradicts the assumption that $\lnot \B$ is not provable in K. Thus, K$'$ must be consistent. This can be done without loss of generality: suppose that $\B$ were not provable in K. Similar steps show that adding $\lnot \B$ as an axiom to K$'$ preserve consistency.
+
+\textbf{Lemma 2.13}
+
+The set of expressions of a language $\lang$ is denumerable. Hence, the same is true of the set of terms, the set of wfs, and the set of closed wfs.
+
+\textbf{Proof}
+This one is assigning prime factorizations to expressions to show that the set of expressions of $\lang$ is denumerable. We can effectively decide whether any given symbol is a symbol of $\lang$ and we can effectively decide whether some number is the number of an expression of $\lang$ (the same for terms, wfs, closed wfs, etc.). 
+
+\textbf{Definitions}
+\begin{enumerate} [label = \roman*.]
+    \item A theory K is \textit{complete} if, for every closed wf $\B$ of K, either $\proovek \B$ or $\proovek \lnot \B$.
+    \item A theory K$'$ is an \textit{extensions} of a theory K if every theorem of K is a theorem of K$'$. We also call K a subtheory of K$'$ in this case
+\end{enumerate}
+
+These definitions will be important for the upcoming completeness theorems. 
+
+\textbf{Proposition 2.14 (Lindenbaum's Lemma)}
+
+If K is a consistent theory, then there is a consistent, complete extension of K.
+
+\textbf{Proof}
+
+\begin{enumerate}
+    \item Let $\B_1, \B_2, \dots$ be an enumeration of all closed wfs of the language of K, by Lemma 2.13.
+    \item Define a sequence $\text{J}_0, \text{J}_1, \text{J}_2, \dots$ of theories in the following way:
+    \begin{enumerate} [label = \roman*.]
+        \item $\text{J}_0$ is K.
+        \item Assume that $\text{J}_n$ is defined, with $n\geq 0$.
+        \item If it is not the case that $\vdash_{\text{J}_n} \lnot \B_{n+1}$, then let $\text{J}_{n+1}$ be obtained by adding $\B_{n+1}$ as an additional axiom.
+        \item On the other hand, if $\vdash_{\text{J}_n} \lnot \B_{n+1}$, let $\text{J}_{n+1}=\text{J}_n$.
+    \end{enumerate}
+    \item Let J be the theory obtained by taking as axioms all the axioms of all the $\text{J}_i$s, including $\text{J}_0=\text{K}$.
+    \item We can show that J is consistent by proving that every $\text{J}_i$ is consistent via a proof by contradiction in J, involving as it does only a finite number of axioms, is the same as a proof by contradiction in some $\text{J}_i$.
+    \item We proceed with proof by induction:
+    \begin{enumerate} [label = \roman*.]
+        \item By hypothesis, $\text{J}_0=\text{K}$ is consistent.
+        \item Assume that $\text{J}_i$ is consistent.
+        \item If $\text{J}_{i+1}=\text{J}_i$, then $\text{J}_{i+1}$ is consistent.
+        \item If $\text{J}_{i+1} \not =\text{J}_i$, we know by definition of $\text{J}_{i+1}$ in line 2.iii that $\lnot \B_{i+1}$ is not provable in $\text{J}_i$.
+        \item This means that $\B_{i+1}$ is added as an axiom to $\text{J}_i$ to generate $\text{J}_{i+1}$, which is consistent by Lemma 2.12.
+    \end{enumerate}
+    \item So, all $\text{J}_i$s are consistent.
+    \item To prove the completeness of J, let $\C$ be any closed wf of K.
+    \item Then $\C=\B_{k+1}$ for some $k\geq 0$.
+    \item Now, either $\vdash_{\text{J}_k} \lnot \B_{k+1}$ or $\vdash_{\text{J}_{k+1}} \B_{k+1}$
+    \item This is because if it is not the case that $\vdash_{\text{J}_k} \lnot \B_{k+1}$, then $\B_{k+1}$ is added as an axiom in $\text{J}_{k+1}$.
+    \item Therefore, either $\vdash_{\text{J}} \lnot \B_{k+1}$ or $\vdash_{\text{J}} \B_{k+1}$, which shows that J is complete.
+\end{enumerate}
+
+Note that even if one can effectively determine whether any wf is an axiom of K, it may not be possible to do the same with (or even to enumerate effectively) the axioms of J; that is, J may not be axiomatic even if K is. This is due to the possibility of not being able to determine, at each step, whether or not $\lnot \B_{n+1}$ is provable in $\text{J}_n$.
+
+\textbf{Lemma 2.15}
+Every consistent theory K has a consistent extension K$'$ such that K$'$ is a scapegoat theory and K$'$ contains denumerably many closed terms. This proof is horrific to read in the textbook, hopefully this presentation is helpful.
+
+\textbf{Proof}
+\begin{enumerate}
+    \item Add to the symbols of K a denumerable set $\{b_1, b_2, \dots \}$ of new individual constants and call this new theory K$_0$.
+    \item Its axioms are those of K plus those logical axioms that involve the symbols of K and the new constants.
+    \item K$_0$ is consistent. If this were not the case, then there is a proof in K$_0$ of $\B \land \lnot \B$.
+    \item Replace each $b_i$ appearing in this proof by a variable that does not appear in the proof.
+    \item This transforms the axioms into axioms and preserves the correctness of the applications of the rules of inference.
+    \item The final wf in the proof is still a contradiction, but now the proof does not involve and $b_i$s and is therefore a proof in K.
+    \item This contradicts the consistency of K, hence K$_0$ is consistent.
+    \item By Lemma 2.13, let $F_1(x_{i_1}), F_2(x_{i_2}), \dots, F_k(x_{i_k}), \dots$ be an enumeration of all wfs of K$_0$ that have one free variable.
+    \item Choose a sequence $b_{j_1}, b_{j_2}, \dots$ of some of the new individual constants such that each $b_{j_k}$ is not contained in any of the wfs $F_1(x_{i_1}), \dots, F_k(x_{i_k})$ and such that $b_{j_k}$ is distinct from each of $b_{j_1}, \dots ,b_{j_{k-1}}$.
+    \item Consider the wf:
+    \[(S_k) \quad (\exists x_{i_k}) \lnot F_k(x_{i_k}) \imp \lnot F_k(b_{j_k})\]
+    \item Let K$_n$ be the theory obtained by adding $(S_1), \dots, (S_n)$ to the axioms of K$_0$, and let K$_\infty$ be the theory obtained by adding all the $(S_i)$s as axioms to K$_0$.
+    \item Any proof in K$_\infty$ contains only a finite number of the $(S_i)$s and, therefore, will also be a proof in some K$_n$.
+    \item Hence, if all of the K$_n$s are consistent, so is K$_\infty$.
+    \item To demonstrate all K$_n$s are consistent, we proceed by induction:
+    \begin{enumerate} [label = \roman*.]
+        \item We know that K$_0$ is consistent.
+        \item Assume that K$_{n-1}$ is consistent but that K$_n$ is inconsistent $(n\geq 1)$.
+        \item If K$_n$ is inconsistent, then any wf is provable in K$_n$ by the tautology $\lnot A \imp (A \imp B)$ by Proposition 2.1 and MP. In particular, $\vdash_{\text{K}_n} \lnot (S_n)$.
+        \item  Hence, $(S_n) \prooveknone \lnot (S_n)$.
+        \item Because $(S_n)$ is closed, we can use Corollary 2.7 to obtain $\prooveknone (S_n)\imp \lnot (S_n)$.
+        \item Now, we can use the tautology $(A \imp \lnot A) \imp \lnot A)$ by Proposition 2.1 and MP to obtain $\prooveknone \lnot (S_n)$. That is,
+        \[\prooveknone \lnot \big [ (\exists x_{i_n}) \lnot F_n(x_{i_n}) \imp \lnot F_n(b_{j_n}) \big ]\]
+        \item Now, by $\imp$ elimination, we obtain $\prooveknone (\exists x_{i_n}) \lnot F_n(x_{i_n})$ and $\prooveknone \lnot \lnot F_n(b_{j_n})$, and then, by $\lnot $ elimination, $\prooveknone F_n(b_{j_n})$.
+        \item From the latter and the fact that $b_{j_n}$ does not occur in $(S_0), \dots, (S_{n-1})$, we conclude that $\prooveknone F_n(x_r)$, where $x_r$ is a variable that does not occur in the proof of $F_n(b_{j_n})$. (Simply replace in the proof all occurrences of $b_{j_n}$ by $x_r$).
+        \item By Gen, $\prooveknone (\forall x_r) F_n(x_r)$, and then, by Lemma 2.11 and $\bicon$ elimination, $\prooveknone (\forall x_{i_n}) F_n(x_{i_n})$. (We use the fact that $F_n(x_r)$ and $F_n(x_{i_n})$ are similar).
+        \item But we already have $\prooveknone (\exists x_{i_n}) \lnot F_n(x_{i_n})$, which is an abbreviation of $\prooveknone \lnot (\forall x_{i_n})\lnot \lnot F_n(x_{i_n})$.
+        \item This yields $\prooveknone \lnot (\forall x_{i_n}) F_n(x_{i_n})$ by replacement theorem, which contradicts the hypothesis that K$_{n-1}$ is consistent.
+    \end{enumerate}
+    \item Hence, K$_n$ must also be consistent.
+    \item Thus, K$_\infty$ is consistent, it is an extension of K, and it is a scapegoat theory.
+\end{enumerate}
+
+\textbf{Lemma 2.16}
+Let J be a consistent, complete scapegoat theory. Then J has a model M whose domain is the set $D$ of closed terms of J.
+
+\textbf{Proof}
+\begin{enumerate}
+    \item For any individual constant $a_i$ of J, let $\interp{a_i} = a_i$.
+    \item For any function letter $f_k^n$ of J and for any closed terms $t_1,\dots, t_n$ of J, let $\interp{f_k^n}(t_1, \dots, t_n)=f_k^n(t_1,\dots,t_n)$. (Notice that $f_k^n(t_1,\dots,t_n)$ is a closed term, hence $\interp{f_k^n}$ is an $n$-ary operation on $D$).
+    \item For any predicate letter $A_k^n$ of J, let $\interp{A_k^n}$ consist of all $n$-tuples $\langle t_1, \dots, t_n \rangle$ of closed terms $t_1, \dots, t_n$ of J such that $\proovej A_k^n(t_1, \dots, t_n)$.
+    \item We will now show that, for any closed wf $\C$ of J
+    \[\bm{\bm{(\square)}} \quad \modelM \C \text{ iff } \proovej \C\]
+    \item If this is established and $\B$ is any axiom of J, let $\C$ be the closure of $\B$. Then:
+    \begin{enumerate} [label = \roman*.]
+        \item By Gen, $\proovej \C$.
+        \item By $\bm{(\square)}$, $\modelM \C$.
+        \item By VI on page 5 ($\modelM \B \text{ iff } \modelM (\forall x_i) \B$), $\modelM \B$.
+        \item Hence, M would be a model of J.
+    \end{enumerate}
+    \item We now prove $\bm{(\square)}$ by induction on the number $r$ of connectives and quantifiers in $\C$.
+    \item Assume that $\bm{(\square)}$ holds for all closed wfs with fewer than r connectives and quantifiers.
+\end{enumerate}
+\begin{enumerate} [label = \textit{Case \arabic*.}, leftmargin=3\parindent]
+    \item $\C$ is a closed atomic wf $A_k^n(t_1, \dots, t_n$). Then $\bm{(\square)}$ is a direct consequence of the definition of $\interp{A_k^n}$.
+    \item $\C$ is $\lnot \D$. 
+    \begin{enumerate} [label = \roman*.]
+        \item If $\C$ is true for M, then $\D$ is false for M.
+        \item So, by \textbf{IH}, not-$\proovej \D$. 
+        \item Because J is complete and $\D$ is closed, $\proovej \lnot \D$ \comment{conceptual check: why can we say this?}, which is the same as saying $\proovej \C$.
+        \item Conversely, if $\C$ is not true for M, then $\D$ is true for M.
+        \item Hence, $\proovej \D$.
+        \item Because J is consistent, not-$\proovej \lnot \D$, so not-$\proovej \C$.
+    \end{enumerate}
+    \item $\C$ is $\D \imp \Escr$.
+    \begin{enumerate} [label = \roman*.]
+        \item Since $\C$ is closed, so are $\D$ and $\Escr$.
+        \item If $\C$ is false for M, then $\D$ is true and $\Escr$ is false. 
+        \item Hence, by \textbf{IH}, $\proovej \D$ and not-$\proovej \Escr$.
+        \item By the completeness of J, $\proovej \lnot \Escr$.
+        \item Now by instance of the following tautology:
+        \[D \imp (\lnot E \imp \lnot(D \imp E))\]
+        and two applications of MP, $\proovej \lnot(\D \imp \Escr)$.
+        \item This tells us that $\proovej \lnot \C$, and by consistency of J, not-$\proovej \C$.
+        \item Conversely, if not-$\proovej \C$, then, by completeness of J, $\proovej \lnot \C$.
+        \item This is the same as $\proovej \lnot (\D \imp \Escr)$.
+        \item By $\imp$ elimination, $\proovej \D$ and $\provej \lnot \Escr$.
+        \item Now, by $\bm{(\square)}$ for $\D$, $\D$ is true for M.
+        \item By the consistency of J, not-$\proovej \Escr$ and, therefore, by $\bm{(\square)}$ for $\Escr$, $\Escr$ is false for M.
+        \item Thus, since $\D$ is true for M and $\Escr$ is false for M, $\C $ is false for M.
+    \end{enumerate}
+    \item $\C$ is $(\forall x_m) \D$.
+\end{enumerate}
+\begin{enumerate} [label = \textit{Case 4\alph*.}, leftmargin=3\parindent]
+    \item $\D$ is a closed wf.
+    \begin{enumerate} [label = \roman*.]
+        \item By \textbf{IH}, $\modelM \D$ iff $\provej \D$.
+        \item By Exercise 2.32(a)\footnote{Assume that $\B$ and $\C$ are wfs and that $x$ is not free in $\B$. Prove: $\vdash \B \imp (\forall x) \B$.}, $\proovej \D \bicon (\forall x_m) \D$.
+        \item So, $\proovej \D$ iff $\proovej (\forall x_m) \D$ by $\bicon$ elimination.
+        \item Also, $\modelM \D$ iff $\modelM (\forall x_m) \D$ by property VI on page 5.
+        \item Hence, $\modelM \C$ iff $\modelM (\forall x_m) \C$.
+    \end{enumerate}
+    \item $\D$ is not a closed wf. Since $\C$ is closed, $\D$ has $x_m$ as its only free variable. Let $\D$ be $F(x_m)$. Then $\C$ is $(\forall x_m) F(x_m)$
+    \begin{enumerate} [label = \roman*.]
+        \item Assume $\modelM \C$ and not-$\proovej \C$.
+        \begin{enumerate} [label = \alph*.]
+            \item By the completeness of J, $\proovej \lnot \C$, which means $\proovej \lnot (\forall x_m) F(x_m)$.
+            \item Then, by Exercise 2.33(a)\footnote{Prove that $\vdash (\exists x) \lnot \B \bicon \lnot (\forall x) \B$} and $\bicon$ elimination, $\proovej$.
+            \item Because J is a scapegoat theory, $\proovej \lnot F(t)$ for some closed term $t$ of J.
+            \item By $\modelM \C$, which means $\modelM (\forall x_m)F(x_m)$.
+            \item Because $(\forall x_m)F(x_m) \imp F(t)$ is true for M by property X on page 6, $\modelM F(t)$.
+            \item Hence, by $\bm{(\square)}$ for $F(t)$, $\proovej F(t)$.
+            \item This contradicts the consistency of J.
+            \item So, if $\modelM \C$, then $\proovej \C$.
+        \end{enumerate}
+        \item Assume not-$\modelM \C$ and $\proovej \C$. Then:
+        \begin{center}
+            $\bm{(\#)} \quad \proovej (\forall x_m) F(x_m)\quad $and $\quad \quad \text{not-}\modelM(\forall x_m)F(x_m)$
+        \end{center}
+        \begin{enumerate} [label = \alph*.]
+            \item By $\bm{(\#\#)}$, some sequence of elements of the domain $D$ does not satisfy $(\forall x_m)f(x_m)$.
+            \item Hence, some sequence $s$ does not satisfy $F(x_m)$. Let $t$ be the $i$th component of $s$.
+            \item Notice that $s^*(u)=u$ for all closed terms $u$ of J (by the definition of $\interp{a_i}$ and $\interp{f_k^n}$).
+            \item It can also be seen that $F(t)$ has fewer connectives and quantifiers than $\C$.
+            \item Therefore, the \textbf{IH} applies to $F(t)$, e.g. $\bm{(\square)}$ holds for $F(t)$.
+            \item Hence, by Lemma 2(a) on page 60 of the textbook (sorry I didn't include this one), $s$ does not satisfy $F(t)$.
+            \item So, $F(t)$ is false for M.
+            \item However, by $\bm{(\#)}$ and rule A4, $\proovej F(t)$, and so, by $\bm{(\square)}$ for $F(t)$, $\modelM F(t)$.
+            \item This contradiction shows that, if $\proovej \C$, then $\modelM \C$.
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate} 
+
+\textbf{Proposition 2.17}
+Every consistent theory K has a denumerable model. 
+
+\textbf{Proof}
+\begin{enumerate}
+    \item By Lemma 2.15, K has a consistent extension K$'$ such that K$'$ is a scapegoat theory and has denumerably many closed terms.
+    \item By Lindenbaum's lemma (Proposition 2.14), K$'$ has a consistent, complete extionsion J that has the same symbols as K$'$.
+    \item Hence, J is also a scapegoat theory.
+    \item By Lemma 2.16, J has a model M whose domain is the denumerable set of closed terms of J.
+    \item Since J is an extension of K, M is a denumerable model of K.
+\end{enumerate}
+
+\textbf{Corollary 2.18}
+Any logically valid wf of $\B$ of a theory K is a theorem of K.
+
+\textbf{Proof}
+\begin{enumerate}
+    \item We need consider only closed wfs $\B$, since a wf $\D$ is logically valid iff its closure is logically valid and $\D$ is provable in K iff its closure is provable in K.
+    \item So, let $\B$ be a logically valid closed wf of K. Assume that not-$\proovek \B$.
+    \item By Lemma 2.12, if we add $\lnot \B$ as a new axiom to K, the new theory K$'$ is consistent.
+    \item Hence, by proposition 2.17, K$'$ has a model M.
+    \item Since $\lnot \B$ is an axiom of K, $\lnot \B$ is true for M.
+    \item But, since $\B$ is logically valid, $\B$ is true for M.
+    \item Hence, $\B$ is both true and false for M, which is impossible.
+    \item Thus, $\B$ must be a theorem of K.
+\end{enumerate} 
+
+\textbf{Corollary 2.19 \godel's Completeness Theorem, 1930)}
+In any predicate calculus, the theorems are precisely the logically valid wfs. 
+
+\textbf{Proof}
+This follows from Proposition 2.2 and Corollary 2.18. That's all Mendelson gives us, but really it makes sense: 2.2 handles all the wfs of our predicate calculus which are "imported" from our chapter 1 propositional calculus (i.e. no quantifiers, etc.), while 2.18 handles all other wfs, e.g. the wfs which are unique to our predicate calculus.
+
+\textbf{Corollary 2.20}
+Let K be any theory.
+\begin{enumerate}
+    \item A wf $\B$ is true in every denumerable model of K iff $\proovek \B$.
+    \item If (in every model of K) every sequence that satisfies all wfs in a set $\Gamma$ of wfs also satisfies a wf $\B$, then $\Gamma \proovek \B$.
+    \item If a wf $\B$ is a logical consequence of a set $\Gamma$ of wfs of K, then $\Gamma \proovek \B$.
+    \item If a wf $\B$ of K is a logical consequence of a wf $\C$ of K, then $\C \proovek \B$.
+\end{enumerate}
+
+\textbf{Proof}
+\begin{enumerate} [label = \alph*.]
+    \item We may assume $\B$ is closed (Why?)\footnote{$\ $Open wfs cannot be true in every model! (fact check here would be nice but I'm pretty sure this is true)}.
+    \begin{enumerate} [label = \roman*.]
+        \item If not-$\proovek \B$, then the theory K$' = \text{K} +\{\lnot \B \}$ is consistent, by lemma 2.12 (the notation indicates that $\B$ is added to the set of axioms of K).
+        \item Hence, by Proposition 2.17, K$'$ has a denumerable model M.
+        \item However, because $\lnot \B$ is an axiom of K$'$, it is true for M.
+        \item By hypothesis, since M is a denumerable model of K, $\B$ is true for M.
+        \item This would indicate that $\B$ is true and false for M, which is impossible.
+    \end{enumerate}
+    \item Consider the theory $\text{K} + \Gamma$. By the hypothesis, $\B$ is true for every model of this theory. Hence, by (a), $\vdash_{\text{K}+\Gamma} \B$. So, $\Gamma \proovek \B$.
+    \item Part (c) is a consequence of (b) and part (d) is a special case of (c).
+\end{enumerate} 
+
+\textbf{Corollary 2.21 (Skolem-L\"{o}wenheim Theorem, 1920, 1915)}
+Any theory that has a model has a denumerable model. 
+
+\textbf{Proof}
+If K has a model, then K is consistent, since no wf can be both true and false for the same model M. Hence, by proposition 2.17, K has a denumerable model. 

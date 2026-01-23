@@ -1,0 +1,42 @@
+\subsection{Rule C}
+
+If we have some wf of the form $(\exists x) \B(x)$, we can choose some $b$ such that $\B(b)$. This can often simplify proofs, as this is basically a shortcut for a longer sequence of steps. Check page 78-79 for an example. There are some rules, however. A rule C deduction in a FOT K is defined in the following manner:
+
+$\Gamma \vdash_\text{C} \B$ iff there is a sequence of wfs $\D_1, \dots, \D_n$ such that $\D_n$ is $\B$ and the following conditions hold:
+
+\begin{enumerate}
+    \item For each $i<n$, either
+    \begin{enumerate} [label = \alph*.]
+        \item $\D_i$ is an axiom of K
+        \item $\D_i$ is in $\Gamma$
+        \item $\D_i$ follows by MP or Gen from preceding wfs in the sequence
+        \item There is a preceding wf $(\exists x) \C(x)$ such that $\D_i$ is $\C(d)$, where $d$ is a \textbf{new} individual constant (Rule C).
+    \end{enumerate}
+    \item As axioms in condition 1a, we also can use all logical axioms that involve the new individual constants already introduced in the sequence by rule C.
+    \item No application of Gen is made using a variable that is free in some $(\exists x) \C(x)$ to which rule C has been previously applied.
+    \item $\B$ contains none of the new individual constants introduced in the sequence in any application of rule C.
+\end{enumerate}
+
+Condition 3 is important because if an application of rule C to a wf $(\exists x)\C(x)$ 
+yields $\C(d)$, then the object referred to by $d$ may depend on the values of the free variables in $(\exists x)\C(x)$. So that one object may not satisfy $\C(x)$ for \textit{all} values of the free variables in $(\exists x)\C(x)$. There is a good example on page 80 which compares the wfs $(\forall x)(\exists y) A_1^2(x,y)$ and $(\exists y)(\forall x) A_1^2(x,y)$, where there is some interpretation which makes the former true but the latter false.
+
+\textbf{Proposition 2.10}
+If $\Gamma \vdash_\text{C} \B$, then $\Gamma \vdash \B$. Moreover, from the following proof one can verify that, if there is an application of Gen in the new  proof of  $\B$ using $\Gamma$ using a certain variable and applied to a wf depending upon a certain wf of $\Gamma$, then there was such an application of Gen in the original proof.
+
+\begin{enumerate}
+    \item Let $(\exists y_1)\C_1(y_1), \dots, (\exists y_k)\C_k(y_k)$ be the wfs in order of occurrence to which rule C is applied in the proof of $\Gamma \vdash_\text{c} \B$, and let $d_1, \dots, d_k$ be the corresponding new individual constants. 
+    \item Then, $\Gamma, \C_1(d_1), \dots, \C_k(d_k) \vdash \B$. 
+    \item Now, by condition 3 of the definition above, Corollary 2.6 is now applicable, yielding $\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash \C_k(d_k) \imp \B$.
+    \item We replace $d_k$ everywhere by a variable $z$ that does not occur in the proof.
+    \item So:
+    \[\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash \C_k(z) \imp \B\]
+    \item Now, by Gen:
+    \[\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash (\forall x)(\C_k(z) \imp \B)\]
+    \item So, by Exercise 2.32(d):
+    \[\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash (\exists y_k)\C_k(y_k) \imp \B\]
+    \item Notice that we can obtain:
+    \[\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash (\exists y_k)\C_k(y_k)\]
+    \item So, by MP we obtain:
+    \[\Gamma, \C_1(d_1), \dots, \C_{k-1}(d_{k-1}) \vdash \B\]
+\end{enumerate}
+This argument can be repeated to eliminate $\C_{k-1}(d_{k-1}), \dots, \C_1(d_1)$ to obtain $\Gamma \vdash \B$. I don't know why Mendelson didn't just use regular induction for this, this is a strange proof relative to the others in this chapter.

@@ -1,0 +1,138 @@
+\subsection{Properties of First-Order Theories}
+
+\comment{Note} For this chapter assume that $\vdash$ means $\vdash_\text{K}$. 
+
+\textbf{Proposition 2.1}
+
+Every wf $\B$ of K that is an instance of a tautology is a theorem of K, and it may be proved using only axioms (A1)-(A3) and MP. 
+
+\textbf{Proof}
+
+$\B$ arises from a tautology $\mathscr{I}$ by substitution. Because $\I$ is a tautology, by Proposition 1.14 we know there is a proof of $\I$ in L. In this proof, makethe same substitution of wfs of K for statement letters as were used in obtaining $\B$ from $\I$, and, for all statement letters in the proof that do not occur in $\I$, substitute and arbitrary wf of K. The resulting sequence of wfs is a proof of $\B$, which only uses (A1)-(A3) and MP because these were the only axioms and inference rules available in Chapter 1 for our propositional calculus. Usage of this will be indicated by writing "Tautology."
+
+\textbf{Proposition 2.2} 
+
+Every theorem of a first-order predicate calculus is logically valid. 
+
+\textbf{Proof}
+
+We know that (A1)-(A5) are logically valid and that our inference rules, MP and Gen, preserve logically validity. So, any wf obtained from a sequence of these wfs and rules of inference must also be logically valid (page 69 for more specific details).
+
+\textbf{Definition}
+
+A theory K is \textit{consistent} if no wf $\B$ and $\B$ are both provable in K. A theory is \textit{inconsistent} otherwise.
+
+\textbf{Corollary 2.3}
+
+Any first-order predicate calculus is consistent
+
+\textbf{Proof}
+
+First, consider if both $\B$ and $\lnot \B$ were theorems of some FO predicate calculus K. Then, by Prop 2.2, both $\B$ and $\lnot \B$ would be logically valid, which creates a contradiction.
+
+If we were to allow this contradiction, we could then prove anything. For instance, the following wf is a tautology: $\B \imp (\lnot \B \imp \C)$. By MP twice, we get $\vdash \C$. This tells us that, in order for K to be consistent, it cannot take on every wf as a theorem.
+
+An important note: the deduction theorem (Prop 1.9) cannot be carried over to FO theories directly. For example, for any wf $\B$, we can show that $\B \proovek (\forall x_i) \B$ however we cannot always show that $\proovek \B \imp (\forall x_i) \B$
+
+Consider a domain with at least two elements, $c$ and $d$. Now, let $\B$ $A_1^1(x_1)$ and interpret $A_1^1$ as some property which holds only for $c$. Then $A_1^1$ is satisfied for any sequence $s=(s_1,s_2, \dots)$ such that $s_1=c$, however $(\forall x_1)A_1^1(x_1)$ is not satisfied by any sequence. So, $A_1^1(x_1) \imp (\forall x_1) A_1^1(x_1)$ is not true for this interpretation, so it is not logically valid. Because it is not logically valid, by Prop 2.2 it cannot be a theorem. 
+
+We can still use the deduction theorem, we just have to be more careful to avoid this kind of mistake. Now, let $\B$ be a wf in a set $\Gamma$ of wfs and assume that we have some sequence of wfs $\D_1, \dots, \D_n$ from $\Gamma$ together with justification for each step in the deduction. We say that $\D_i$ depends upon $\B$ in this proof iff: \textcolor{red}{\textbf{<<Recursive definition!>>}}
+\begin{enumerate}
+    \item $\D_i$ is $\B$ and the justification for $\D_i$ belongs to $\Gamma$ or,
+    \item $\D_i$ is justified as a direct consequence of MP or Gen of some preceding wfs of the sequence, where at least one of the preceding wfs depends upon $\B$.
+\end{enumerate}
+
+There is a good example on page 71 of this.
+
+\textbf{Proposition 2.4}
+
+If $\C$ does not depend upon $\B$ in a deduction showing that $\Gamma, \B \vdash \C$, then $\Gamma \vdash \C$.
+
+\textbf{Proof}
+This one is pretty simple, check page 71 if needed. Basically induction on the length $n$ of the deduction, consider the general cases and boom done.
+
+\textbf{Proposition 2.5 (The Deduction Theroem)}
+
+Assume that, in some deduction showing that $\Gamma, \B \vdash \C$, no application of Gen to a wf that depends upon $\B$ has as its quantified variable a free variable of $\B$. Then $\Gamma \vdash \B \imp \C$.
+
+\textbf{Proof}
+From here on out, for longer and more dense proofs, I will be listing the steps for easier reading.
+
+Let $\D_1, \dots, \D_n$ be a deduction of $\C$ from $\Gamma$ and $\B$ which satisfies the assumption of the proposition. \textbf{Note that in this deduction, } $\D_n$ \textbf{is} $\C$. Now, we prove by induction that $\Gamma \vdash \B \imp \D_i$ for each $i \leq n$:
+\begin{enumerate}
+    \item If $\D_i$ is an axiom or belongs to $\Gamma$, then $\Gamma \vdash \B \imp \D_i$ because $\D_i \imp (\B \imp \D_i)$ is an instance of (A1).
+    \item If $\D_i$ is $\B$, then $\Gamma \vdash \B \imp \D_i$ because $\vdash \B \imp \B$ by Prop 2.1 (Tautology).
+    \item If there exists a $j$ and $k$ less than $i$ such that $\D_k$ is $\D_j \imp \D_i$, then by \textbf{IH}, $\Gamma \vdash \B \imp \D_j$ and $\Gamma \vdash \B \imp \D_k$, with the latter substituting $\D_k$ to get $\Gamma \vdash \B \imp (\D_j \imp \D_i)$. 
+        \begin{enumerate} [label = \alph*.]
+            \item Now, by axiom (A2), $\vdash (\B \imp ( \D_j \imp \D_i)) \imp ((\B \imp \D_j) \imp (\B \imp \D_i))$.
+            \item Now, by MP twice, we get $\vdash \B \imp \D_i$.
+        \end{enumerate}
+    \item Now, suppose that $j<i$ such that $\D_i$ is $(\forall x_k)\D_j$, so, By \textbf{IH}, $\Gamma \vdash \B \imp \D_j$.
+    \item By hypothesis of the theorem, either $\D_j$ does not depend upon $\B$ or $x_k$ is not a free variable of $\B$.
+    \item If $\D_j$ does not depend upon $\B$:
+        \begin{enumerate} [label = \alph*.]
+            \item By Prop 2.4, $\Gamma \vdash \D_j$, and then by Gen we see that $\Gamma \vdash (\forall x_k) \D_j$. 
+            \item Because $\D_i$ is $(\forall x_k)\D_j$ as assumed in step 4, $\Gamma \vdash \D_i$.
+            \item Now, by (A1), $\vdash \D_i \imp (\B \imp \D_i)$.
+            \item By MP of step b on step c, we see that $\Gamma \vdash \B \imp \D_i$.
+        \end{enumerate}
+    \item On the other hand, if $x_k$ is not a free variable of $\B$:
+        \begin{enumerate} [label = \alph*.]
+            \item By (A5), $\vdash (\forall x_k)(\B \imp \D_j) \imp (\B \imp (\forall x_k) \D_j)$.
+            \item By \textbf{IH}, we know that $\Gamma \vdash \B \imp \D_j$.
+            \item So, by Gen on step b, we have $\Gamma\vdash (\forall x_k)(\B \imp \D_j)$.
+            \item By MP of step c on step a, we get $\Gamma \vdash \B \imp (\forall x_k) \D_j$.
+            \item Because $\D_i$ is $(\forall x_k)\D_j$ as assumed in step 4, $\Gamma \vdash \D_i$.
+        \end{enumerate}
+\end{enumerate}
+
+So, we have shown by induction that $\Gamma \vdash \B \imp \D_i$ for each $i \leq n$. Our proposition is just the special case where $i=n$. This can be cumbersome, so Mendelson presents the following Corollaries which are easier to use. 
+
+\textbf{Corollary 2.6}
+If a deduction showing that $\Gamma, \B \vdash \C$ involves no application of Gen of which the quantified variables is free in $\B$, then $\Gamma \B \vdash \C$. 
+
+\textbf{Corollary 2.7}
+If $\B$ is a closed wf and $\Gamma, \B \vdash \C$, then $\Gamma \vdash \B \imp \C$.
+
+\textbf{Useful extension of Propositions 2.4-2.7}
+
+I am a little confused about Mendelson's explanation here, but the upshot is that we can apply the deduction theorem many times in a row.  E.g. $\Gamma, \D, \B \vdash \C$ yields $\Gamma \vdash \D \imp (\B \imp \C)$
+
+\textit{Example}
+
+\[\vdash (\forall x_1)(\forall x_2) \B \imp (\forall x_2)(\forall x_1) \B\] 
+
+\textbf{Proof}
+
+\begin{enumerate}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_1)(\forall x_2) \B$ & Hyp
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_1)(\forall x_2) \B \imp (\forall x_2) \B$ & (A4)
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_2) \B$ & 1, 2, MP
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_2) \B \imp \B$ & (A4)
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $\B$ & 3, 4, MP
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_1) \B$ & 5, Gen
+        \end{tabular}
+    \item 
+        \begin{tabular}{p{8cm} r}
+            $(\forall x_2)(\forall x_1) \B$ & 6, Gen
+        \end{tabular}
+\end{enumerate}
+
+By 1-7, we have $(\forall x_1)(\forall x_2) \B \vdash (\forall x_2)(\forall x_1) \B$ where no application of Gen has as a quantified variable a free variable of $(\forall x_1)(\forall x_2) \B$. So, by Corollary 2.6, $\vdash (\forall x_1)(\forall x_2) \B \imp (\forall x_2)(\forall x_1) \B$.
