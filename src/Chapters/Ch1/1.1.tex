@@ -1,0 +1,96 @@
+\subsection{Propositional Connectives: Truth Tables}
+
+Truth-functional Connectives  (assume capital letters represent sentences)
+
+Negation:
+% \begin{displaymath}
+\[
+\begin{array}{|c|c|}
+% |c c|c| means that there are three columns in the table and
+% a vertical bar ’|’ will be printed on the left and right borders,
+% and between the second and the third columns.
+% The letter ’c’ means the value will be centered within the column,
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+  A & \lnot A\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & F\\
+F & T\\
+\end{array}
+\]
+% \end{displaymath}
+
+Conjunction / And:
+
+\[
+\begin{array}{|c c|c|}
+% |c c|c| means that there are three columns in the table and
+% a vertical bar ’|’ will be printed on the left and right borders,
+% and between the second and the third columns.
+% The letter ’c’ means the value will be centered within the column,
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+A & B & A \land B\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & T & T\\
+F & T & F\\
+T & F & F\\
+F & F & F\\
+\end{array}
+\]
+
+Disjunction / Inclusive Or:
+
+\[
+\begin{array}{|c c|c|}
+% |c c|c| means that there are three columns in the table and
+% a vertical bar ’|’ will be printed on the left and right borders,
+% and between the second and the third columns.
+% The letter ’c’ means the value will be centered within the column,
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+A & B & A \lor B\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & T & T\\
+F & T & T\\
+T & F & T\\
+F & F & F\\
+\end{array}
+\]
+
+Conditional / If-then:
+
+\[
+\begin{array}{|c c|c|}
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+A & B & A \imp B\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & T & T\\
+F & T & T\\
+T & F & T\\
+F & F & F\\
+\end{array}
+\]
+
+
+Biconditional / If-then:
+
+\[
+\begin{array}{|c c|c|}
+% letter ’l’, left-aligned, and ’r’, right-aligned.
+A & B & A \bicon B\\ % Use & to separate the columns
+\hline % Put a horizontal line between the table header and the rest.
+T & T & T\\
+F & T & F\\
+T & F & F\\
+F & F & T\\
+\end{array}
+\]
+
+For Mendlelson's notation:
+
+\begin{enumerate}
+  \item Capital italic letters (sometimes w/ subscripts) are statement forms
+  \item if $\B$ and $\C$ are statement forms, we can modify them with propositonal connectives to form other statements
+\end{enumerate}
+
+I don't feel the need to recreate the large truth tables, as they are clear enough in the text.
+
+Note: If there are $n$ distinct letters in a statement form, there are $2^n$ possible assignments of truth values to the statement letters, meaning $2^n$ rows in the truth table.

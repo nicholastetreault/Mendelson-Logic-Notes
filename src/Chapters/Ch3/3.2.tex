@@ -37,7 +37,7 @@ Assume $f$ is representable in K by a wf $\B(x_1, \dots, x_n, y)$. Let us show t
 \]
 
 \begin{enumerate}
-    \item Assume $f(k_1, \dots, k_n) = m$. Then $\provek \B(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$ and $\provek (\exists_1 y) \B(\overine{k}_1, \dots, \overline{k}_n, y)$. So, by $\land$ introduction and $\lor$ introduction, we get $\provek \C(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$.
+    \item Assume $f(k_1, \dots, k_n) = m$. Then $\provek \B(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$ and $\provek (\exists_1 y) \B(\overline{k}_1, \dots, \overline{k}_n, y)$. So, by $\land$ introduction and $\lor$ introduction, we get $\provek \C(\overline{k}_1, \dots, \overline{k}_n, \overline{m})$.
 \end{enumerate}
 \begin{enumerate} [label = \arabic*'.]
     \setcounter{enumi}{1}
@@ -56,7 +56,7 @@ From (i) and (ii), $(\exists_1 y) \C(x_1, \dots, x_n, y)$. Thus, we have proved 
 \textit{Case 2}. Take $\lnot (\exists_1 y) \B(x_1, \dots, x_n, y)$ as hypothesis.
 
 \begin{enumerate} [label = (\roman*)]
-    \item From our hypothesis and the theorem $0=0$, we obtain $\lnot (\exists_1 y) \B(x_1, \dots, x_n, y) \land 0=0$ by $\land$ introduction. By $\lor$ introduction, $\C(x_1, \dots, x_n, 0)$, and, by rule E4, $(\xists y) \C(x_1, \dots, x_n, y)$.
+    \item From our hypothesis and the theorem $0=0$, we obtain $\lnot (\exists_1 y) \B(x_1, \dots, x_n, y) \land 0=0$ by $\land$ introduction. By $\lor$ introduction, $\C(x_1, \dots, x_n, 0)$, and, by rule E4, $(\exists y) \C(x_1, \dots, x_n, y)$.
     \item Assume $\C(x_1, \dots, x_n, u) \land \C(x_1, \dots, x_n, v)$. From $\C(x_1, \dots, x_n, u)$ and our hypothesis, it follows that $u=0$. Likewise, from $\C(x_1, \dots, x_n, v)$ and our hypothesis, $v=0$. Hence, $u=v$. By the deduction theorem, we obtain $\C(x_1, \dots, x_n, u) \land \C(x_1, \dots, x_n, v) \imp u=v$.
 \end{enumerate}
 

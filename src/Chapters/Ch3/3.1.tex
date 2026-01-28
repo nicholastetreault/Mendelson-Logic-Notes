@@ -60,7 +60,7 @@ For any terms $t$, $s$, $r$, the following wfs are theorems of S.
     \item $t' \cdot r = t\cdot r + r$
     \item $t \cdot r = r \cdot t$
     \item $t=r \imp s \cdot t= s \cdot r$
-\end{enumerate}\\
+\end{enumerate}
 
 \textbf{Proof} (The rest are in the textbook)
 
@@ -158,7 +158,7 @@ For and terms $t$, $r$, $s$, the following wfs are theorems of S.
     \item $(r+s) \cdot t = (r\cdot t) + (s \cdot t)$ (distributivity)
     \item $(t \cdot r) \cdot s = t \cdot (r \cdot s)$ (associativity of $\cdot$)
     \item $t+s=r+s \imp t=r$ (cancellation law for $+$)
-\end{enumerate}\\
+\end{enumerate}
 
 \textbf{Proof}
 
@@ -187,7 +187,7 @@ The following are theorems of S.
     \item $t \not = 0 \imp (\exists y)(t = y')$
     \item $s \not = 0 \imp (t \cdot s = r \cdot s \imp t = r)$
     \item $t \not = 0 \imp (t \not = 1 \imp (\exists y)(t = y''))$ 
-\end{enumerate}\\
+\end{enumerate}
 
 \textbf{Proof}
 
@@ -203,7 +203,7 @@ The proofs in the chapter are pretty clear for this one so I'll spare myself the
     \end{enumerate}
     \item Any model for S is infinite.
     \item For any cardinal number $\aleph_\beta$, S has a normal model of cardinality $\aleph_\beta$.
-\end{enumerate}\\
+\end{enumerate}
 
 \textbf{Proof}
 
@@ -238,7 +238,7 @@ The proofs in the chapter are pretty clear for this one so I'll spare myself the
                 \item First, $\overline{m + 0}$ is $\overline{m}$.
                 \item Hence, $\proves \overline{m+0}= \overline{m} + \overline{0}$ by (S5').
                 \item Now assume $\proves \overline{m+n} = \overline{m} + \overline{n}$.
-                \tem Then $\proves \big(\overline{m+n}\big)' = \overline{m}+(\overline{n})'$ by (S2') and (S6').
+                \item Then $\proves \big(\overline{m+n}\big)' = \overline{m}+(\overline{n})'$ by (S2') and (S6').
                 \item But, $\overline{m+(n+1)}$ is $\big(\overline{m+n}\big)'$ and $\overline{n+1}$ is $(\overline{n})'$.
                 \item Hence, $\proves \overline{m+(n+1)} = \overline{m}+\big(\overline{n+1}\big)$.
                 \item Thus, $\proves \overline{m+n} = \overline{m} + \overline{n}$.
@@ -274,7 +274,7 @@ b. For any natural number $k>0$, $\proves x=0 \lor \ldots \lor x = (\overline{k-
 
 b'. For any natural number $k>0$ and any wf $\B$, $\proves \B(0) \land \B(\overline{1}) \land \ldots \land \B(\overline{k-1}) \bicon (\forall x)(x < \overline{k} \imp \B(x))$. 
 
-c. $\proves ((\forall x)(x<y \imp \B(x)) \land (\forall x)(x \geq y \immp \C(x))) \imp (\forall x)(\B(x) \lor \C(x))$.\\
+c. $\proves ((\forall x)(x<y \imp \B(x)) \land (\forall x)(x \geq y \imp \C(x))) \imp (\forall x)(\B(x) \lor \C(x))$.\\
 
 \textbf{Proof}
 
@@ -409,7 +409,7 @@ Skipping, the proofs aren't quite as important for these notions of math at this
             $0 < y$ & 1, Proposition 3.7(t)
             \end{tabular}
         \item \begin{tabular}{p{8cm} r}
-            $0 = y \cdot 0 + 0 \lnd 0 < y$ & 2, 3, conjunction rule
+            $0 = y \cdot 0 + 0 \land 0 < y$ & 2, 3, conjunction rule
             \end{tabular}
         \item \begin{tabular}{p{8cm} r}
             $(\exists u)(\exists v)(0 = y \cdot u + v \land v < y)$ & 4, rule E4 twice
@@ -444,7 +444,7 @@ Skipping, the proofs aren't quite as important for these notions of math at this
             $b' < y \imp (x'=y \cdot a + b' \land b' < y)$ & 4, (S6'), derived rules
             \end{tabular}
         \item \begin{tabular}{p{8cm} r}
-            $b' < y \imp (\exists u)(\exists v)(x' = y \codt u + v \land v < y)$ & 8, rule E4, ded. them.
+            $b' < y \imp (\exists u)(\exists v)(x' = y \cdot u + v \land v < y)$ & 8, rule E4, ded. them.
             \end{tabular}
         \item \begin{tabular}{p{8cm} r}
             $b' = y \imp x' = y \cdot a + y\cdot \overline{1}$ & 4, (S6'), Proposition 3.5(b)
@@ -466,7 +466,8 @@ Skipping, the proofs aren't quite as important for these notions of math at this
 By (i), (ii), Gen, and the induction rule, $\proves (\forall x)(\B(x)$. This establishes the existence of a quotient $u$ and a remainder $v$. To prove uniqueness, proceed as follows:
 \begin{enumerate}
     \item Assume $y \not = 0$.
-    \item Assume $x = \y \cdot u + v \land v < y$ and $x = y\cdot u_1 + v_1 \land v_1<y$.
+    \item Assume $x = y \cdot u + v \land v < y$ and $x = y\cdot u_1 + v_1 \land v_1<y$.
+    \item \comment{might be a mistake above, noticed latex issue but unsure}
     \item Now, $u = u_1$ or $u< u_1$ or $u_1 < u$.
     \item If $u = u_1$, then $v = v_1$ by Proposition 3.4(d).
     \item If $u < u_1$, then $u_1 = u _ w$ for some $w\not = 0$.
